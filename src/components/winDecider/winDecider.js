@@ -32,11 +32,11 @@ export default function useWinDecider(props) {
       columnThreeArr,
       columnFourArr,
       columnFiveArr,
-      // columnSixArr,
-      [0,'helllo', 'hi', 0,0,0],
+      columnSixArr,
+      // [0,'helllo', 'hi', 0,0,0],
       columnSevenArr
     ])
-    alert('hello')
+    // alert('hello')
     // console.log('grid', grid)
     return ()=> console.log('unmounted')
   // }, [columnOneArr], [columnTwoArr], [columnThreeArr], [columnFourArr], [columnFiveArr], [columnSixArr], [columnSevenArr])
@@ -44,38 +44,25 @@ export default function useWinDecider(props) {
 
   const columnArr = [columnOneArr, columnTwoArr, columnThreeArr, columnFourArr, columnFiveArr, columnSixArr, columnSevenArr]
   const setterArr = [setColumnOneArr, setColumnTwoArr, setColumnThreeArr, setColumnFourArr, setColumnFiveArr, setColumnSixArr, setColumnSevenArr]
-  // let grid = [
-  //  [0,0,0,0,0,0],
-  //  [0,0,0,0,0,0],
-  //  [0,0,0,0,0,0],
-  //  [0,0,0,0,0,0],
-  //  [0,0,0,0,0,0],
-  //  [0,0,0,0,0,0],
-  //  [0,0,0,0,0,0],
-  // ]
   
 
-  const updateGame = (column, row) => {
+  const updateGame = (column, row, turn) => {
     // setterArr[column - 1](columnArr[column -1][row] = 1)
     let peanut = columnArr[column]
     // console.log('column and row', peanut[row])
     // console.log('before', peanut)
-    peanut[row] = 'red'
+    peanut[row] = turn
     // console.log('after', peanut)
     setterArr[column](peanut)
     // console.log(columnArr[column])
-    // peanut.push('red')
-    // console.log('peanut', peanut)
-    // setterArr[column](peanut.concat(columnArr[column][row, columnArr[column].length]))
-    // grid[column][row] = 1
-    // console.log(grid)
+
     // setGame() 
     // result of logic
   }
-  useEffect(() => {
-    //check if winner
-    setWinnter()
-  }, [game])
+  // useEffect(() => {
+  //   check if winner
+  //   setWinnter()
+  // }, [game])
   return {winner, updateGame}
 }
 

@@ -123,7 +123,7 @@ export default function GameColumn(props) {
     setClickCount(clickCount + 1)
     console.log('click', clickCount)
     console.log(props.column)
-    props.updateFunc(props.column - 1, clickCount)
+    props.updateFunc(props.column - 1, clickCount, player.turn === 'Player One' ? 'red' : 'yellow')
   }
 
 return (
