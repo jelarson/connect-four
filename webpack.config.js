@@ -1,10 +1,15 @@
-const path = require("path");
+// webpack plugins
+const SplitChunksPlugin = require("webpack/lib/optimize/SplitChunksPlugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 module.exports = {
   entry: {
-    app: ['./src/bootstrap.js'],
-    // vendor: './src/vendor.js',
+    app: ["./src/index.js"]
+  },
+  resolve: {
+    extensions: [".js"],
+    modules: ["node_modules"]
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -13,7 +18,10 @@ module.exports = {
   },
   devServer: {
     contentBase: "./dist",
-    port: 5001
+    port: 5001,
+    historyApiFallback: {
+      disableDotRule: true
+    },
   },
   devtool: "inline-source-map",
   module: {
@@ -31,7 +39,7 @@ module.exports = {
                 "@emotion/babel-preset-css-prop"
               ],
               plugins: [
-                "transform-class-properties",
+                "@babel/plugin-proposal-class-properties",
                 "@babel/proposal-object-rest-spread",
                 "emotion"
               ]
@@ -40,20 +48,24 @@ module.exports = {
         ]
       },
       {
-        type: 'javascript/auto',
+        type: "javascript/auto",
         test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
-        loader: 'file-loader',
+        loader: "file-loader",
         options: {
-          name: '[path][name].[ext]',
-          publicPath: '/'
+          name: "[path][name].[ext]",
+          publicPath: "/"
         }
       }
     ]
   },
   plugins: [
+    new SplitChunksPlugin({
+      name: ["app"],
+      minChunks: Infinity
+    }),
     new HtmlWebpackPlugin({
       inject: true,
-      template: path.resolve(__dirname, "./index.html")
+      template: path.resolve(__dirname, "./static/index.html")
     })
   ]
 };

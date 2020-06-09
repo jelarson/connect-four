@@ -5,6 +5,7 @@ import { css } from "@emotion/core";
 const homeWrapperCss = css`
   width: 100vw;
   height: 100vh;
+  margin: -8px;
   display: flex;
   flex-direction: column;
   /* // justify-content: center; */
@@ -12,14 +13,60 @@ const homeWrapperCss = css`
   background-color: #5465ff;
 `;
 
+const homeTitleCss = css`
+margin-top: 25px;
+font-size: 4em;
+color: #faa307;
+font-weight: 900;
+text-align: center;
+span {
+  color: #d00000;
+}
+`;
+
+const homeButtonChoiceWrapper = css`
+margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .home-button-message {
+      text-align: center;
+      font-size: 2.4em;
+      color: #faa307;
+    }
+    .home-button-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+
+      .home-button {
+        margin-top: 34px;
+        padding: 12px;
+        border-radius: 10px;
+        background-color: #d00000;
+        font-size: 26px;
+        font-weight: 900;
+        color: #faa307;
+        text-decoration: none;
+
+        &:hover {
+          background-color: #faa307;
+          color: #d00000;
+        }
+      }
+    }
+`;
+
 export default function Home() {
   return (
     <div css={homeWrapperCss}>
-      <div className='home-title'>
+      <div css={homeTitleCss}>
         Can you <br />
         <span>CONNECT FOUR</span>?
       </div>
-      <div className='home-button-choice-wrapper'>
+      <div css={homeButtonChoiceWrapper}>
         <div className='home-button-message'>
           Who would you like to play against?
         </div>
