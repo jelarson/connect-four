@@ -18,23 +18,29 @@ export default function useWinDecider(props) {
     [...columnFourArr],
     [...columnFiveArr],
     [...columnSixArr],
+    // [0,'helllo', 'hi', 0,0,0],
     [...columnSevenArr]
   ]
   )
 
+  console.log('before grid', grid)
+
   useEffect(() => {
     setGrid([
-      [...columnOneArr],
-      [...columnTwoArr],
-      [...columnThreeArr],
-      [...columnFourArr],
-      [...columnFiveArr],
-      [...columnSixArr],
-      [...columnSevenArr]
+      columnOneArr,
+      columnTwoArr,
+      columnThreeArr,
+      columnFourArr,
+      columnFiveArr,
+      // columnSixArr,
+      [0,'helllo', 'hi', 0,0,0],
+      columnSevenArr
     ])
-    console.log(grid)
-  }, [columnOneArr], [columnTwoArr], [columnThreeArr], [columnFourArr], [columnFiveArr], [columnSixArr], [columnSevenArr])
-  // }, [columnOneArr, columnTwoArr, columnThreeArr, columnFourArr, columnFiveArr, columnSixArr, columnSevenArr])
+    alert('hello')
+    // console.log('grid', grid)
+    return ()=> console.log('unmounted')
+  // }, [columnOneArr], [columnTwoArr], [columnThreeArr], [columnFourArr], [columnFiveArr], [columnSixArr], [columnSevenArr])
+  }, [columnOneArr, columnTwoArr, columnThreeArr, columnFourArr, columnFiveArr, columnSixArr, columnSevenArr])
 
   const columnArr = [columnOneArr, columnTwoArr, columnThreeArr, columnFourArr, columnFiveArr, columnSixArr, columnSevenArr]
   const setterArr = [setColumnOneArr, setColumnTwoArr, setColumnThreeArr, setColumnFourArr, setColumnFiveArr, setColumnSixArr, setColumnSevenArr]
@@ -52,12 +58,12 @@ export default function useWinDecider(props) {
   const updateGame = (column, row) => {
     // setterArr[column - 1](columnArr[column -1][row] = 1)
     let peanut = columnArr[column]
-    console.log('column and row', peanut[row])
-    console.log('before', peanut)
+    // console.log('column and row', peanut[row])
+    // console.log('before', peanut)
     peanut[row] = 'red'
-    console.log('after', peanut)
+    // console.log('after', peanut)
     setterArr[column](peanut)
-    console.log(columnArr[column])
+    // console.log(columnArr[column])
     // peanut.push('red')
     // console.log('peanut', peanut)
     // setterArr[column](peanut.concat(columnArr[column][row, columnArr[column].length]))
