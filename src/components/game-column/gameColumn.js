@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { css } from "@emotion/core";
 
 import useWinDecider from '../winDecider/winDecider'
+import {UserContext} from '../context/context'
+
 
 const columnWrapperCss = css`
   display: flex;
@@ -77,8 +79,12 @@ const columnWrapperCss = css`
 `;
 
 export default function GameColumn(props) {
+
+  const {setPlayer} = useContext(UserContext)
+  const { player} = useContext(UserContext);
+
   
-  const [turn, setTurn] = useState(props.playerColor)
+  // const [turn, setTurn] = useState(player.turn)
   const [clickCount, setClickCount] = useState(0)
   const [rowsRemaining, setRowsRemaining] = useState(6)
   const [circleOne, setCircleOne] = useState('circleOneRed')
@@ -91,28 +97,33 @@ export default function GameColumn(props) {
 
   let columnArr = [setActiveClass1, setActiveClass2, setActiveClass3, setActiveClass4, setActiveClass5, setActiveClass6]
 
+  // useEffect(() => {
+  //   setTurn(props.player)
+  // }, [])
+  
   useEffect(()=>{
-    setCircleOne(turn === '#d00000' ? 'circleOneRed' : 'circleOneYellow')
-  }, [turn])
+    setCircleOne(player.turn === 'Player One' ? 'circleOneRed' : 'circleOneYellow')
+  }, [player])
 
   function clickHandler () {
       let time = 40
       for(let i = 0; i < rowsRemaining - 1; i++){
         setTimeout(() => {
-          columnArr[i](turn === '#d00000' ? 'circleRedActive' : 'circleYellowActive')
+          columnArr[i](player.turn === 'Player One' ? 'circleRedActive' : 'circleYellowActive')
         }, time * i)
         setTimeout(() => {
           columnArr[i]('circle')
         }, time * i+1)
-          columnArr[i](turn === '#d00000' ? 'circleRedActive' : 'circleYellowActive')
+          columnArr[i](player.turn === 'Player One' ? 'circleRedActive' : 'circleYellowActive')
       }
-      columnArr[rowsRemaining - 1](turn === '#d00000' ? 'circleRedActive' : 'circleYellowActive')
+      columnArr[rowsRemaining - 1](player.turn === 'Player One' ? 'circleRedActive' : 'circleYellowActive')
       setRowsRemaining(rowsRemaining - 1)
-      props.setPlayer(turn === '#d00000' ? 'Player Two' : 'Player One')
-      setTurn(props.playerColor)
+      setPlayer(player.turn === 'Player One' ? 'Player Two' : 'Player One')
+      // setTurn(props.player)
     setClickCount(clickCount + 1)
     console.log('click', clickCount)
     console.log(props.column)
+    props.updateFunc(props.column - 1, clickCount)
   }
 
 return (
