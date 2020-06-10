@@ -11,6 +11,7 @@ export default function useWinDecider(props) {
   const [columnFiveArr, setColumnFiveArr] = useState([51,52,53,54,55,56])
   const [columnSixArr, setColumnSixArr] = useState([61,62,63,64,65,66])
   const [columnSevenArr, setColumnSevenArr] = useState([71,72,73,74,75,76])
+  const [almond, setAlmond] = useState([])
   const [grid, setGrid] = useState([
     [...columnOneArr],
     [...columnTwoArr],
@@ -18,7 +19,6 @@ export default function useWinDecider(props) {
     [...columnFourArr],
     [...columnFiveArr],
     [...columnSixArr],
-    // [0,'helllo', 'hi', 0,0,0],
     [...columnSevenArr]
   ]
   )
@@ -33,7 +33,6 @@ export default function useWinDecider(props) {
       columnFourArr,
       columnFiveArr,
       columnSixArr,
-      // [0,'helllo', 'hi', 0,0,0],
       columnSevenArr
     ])
     // alert('hello')
@@ -47,17 +46,29 @@ export default function useWinDecider(props) {
   
 
   const updateGame = (column, row, turn) => {
-    // setterArr[column - 1](columnArr[column -1][row] = 1)
     let peanut = columnArr[column]
-    // console.log('column and row', peanut[row])
-    // console.log('before', peanut)
+    setAlmond(String(peanut[row]).split(''))
     peanut[row] = turn
-    // console.log('after', peanut)
     setterArr[column](peanut)
-    // console.log(columnArr[column])
+    // console.log('almond', almond)
 
     // setGame() 
     // result of logic
+  }
+
+  useEffect(() => {
+    checkWinner(almond)
+  }, [almond])
+
+  function checkWinner(nut){
+
+    console.log('in function col', grid[nut[0] - 1])
+    let arr = []
+    grid.forEach(colArr => {
+      arr.push(colArr[nut[1] -1])
+    })
+    console.log('in function row', arr)
+    // console.log('in function', nut)
   }
   // useEffect(() => {
   //   check if winner
