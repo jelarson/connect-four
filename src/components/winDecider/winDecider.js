@@ -64,15 +64,11 @@ export default function useWinDecider(props) {
     let gridCol = Number(nut[0])
     let gridRow = Number(nut[1])
     let gridColArr = grid[gridCol - 1]
+    // console.log('colly', gridColArr[gridRow - 1])
     let gridRowArr = grid.map(colArr => {
       return colArr[gridRow -1]
     })
     let gridDiagUpLeft = []
-    // for(let i = gridCol; i >= 0; i--){
-    //   if(gridRow < 6){
-    //     gridDiagUpLeft.push(grid[gridCol -2])
-    //   }
-    // }
     let startingGrid = grid.slice(0,gridCol-1).reverse()
     let endingGrid = grid.slice(gridCol, 7)
     let upLeftCounter = gridRow
@@ -85,11 +81,9 @@ export default function useWinDecider(props) {
           upLeftCounter++
         }
       }
-      // gridRow = Number(nut[1])
     })
-    // console.log('end grid', endingGrid)
-    // console.log('start grid', startingGrid)
-    console.log('grid up left', gridDiagUpLeft)
+  
+    // console.log('grid up left', gridDiagUpLeft)
     let gridDiagDownRight = []
     let downRightCounter = gridRow
     endingGrid.forEach(colArr => {
@@ -102,7 +96,7 @@ export default function useWinDecider(props) {
         }
       }
     })
-    console.log('down right', gridDiagDownRight)
+    // console.log('down right', gridDiagDownRight)
 
     let gridDiagUpRight = []
     let upRightCounter = gridRow
@@ -116,7 +110,7 @@ export default function useWinDecider(props) {
           }
         }
       })
-    console.log('grid up right', gridDiagUpRight)
+    // console.log('grid up right', gridDiagUpRight)
 
     let gridDiagDownLeft = []
     let downLeftCounter = gridRow
@@ -130,12 +124,17 @@ export default function useWinDecider(props) {
         }
       }
     })
-    console.log('down left', gridDiagDownLeft)
+    // console.log('down left', gridDiagDownLeft)
+    let leftToRightDiag = []
+    leftToRightDiag.push(...gridDiagUpLeft)
+    // leftToRightDiag.push(...grid[gridCol][gridRow])
+    leftToRightDiag.push(...gridDiagDownRight)
 
-    // grid.forEach(colArr => {
-    //   gridRowArr.push(colArr[girdRow -1])
-    // })
-    // for(let i = Number(nut[0]); i < 7; i++)
+
+   console.log('l to r', leftToRightDiag)
+  //  console.log('column', gridColArr[0])
+  console.log('GR', grid[(gridCol - 1)][0])
+
 
     // console.log('in function row', gridRowArr)
     // console.log('in function col', gridColArr)
