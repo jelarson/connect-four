@@ -61,15 +61,43 @@ export default function useWinDecider(props) {
   }, [almond])
 
   function checkWinner(nut){
-
-    console.log('in function col', grid[nut[0] - 1])
-    let arr = []
-    grid.forEach(colArr => {
-      arr.push(colArr[nut[1] -1])
+    let gridCol = Number(nut[0])
+    let gridRow = Number(nut[1])
+    let gridColArr = grid[gridCol - 1]
+    let gridRowArr = grid.map(colArr => {
+      return colArr[gridRow -1]
     })
-    console.log('in function row', arr)
-    // console.log('in function', nut)
+    let gridDiagUpLeft = []
+    // for(let i = gridCol; i >= 0; i--){
+    //   if(gridRow < 6){
+    //     gridDiagUpLeft.push(grid[gridCol -2])
+    //   }
+    // }
+    let startingGrid = grid.slice(0,gridCol-1).reverse()
+    let endingGrid = grid.slice(gridCol, 7).reverse()
+    startingGrid.forEach(colArr => {
+      if (gridCol > 0) {
+        gridDiagUpLeft.push(colArr[gridRow])
+        gridRow++
+      }
+    })
+    // console.log('end grid', endingGrid)
+    // console.log('start grid', startingGrid)
+    console.log('grid up left', gridDiagUpLeft)
+    let gridDiagDownRight = []
+    let gridDiagUpRight = []
+    let gridDiagDownLeft = []
+
+    // grid.forEach(colArr => {
+    //   gridRowArr.push(colArr[girdRow -1])
+    // })
+    // for(let i = Number(nut[0]); i < 7; i++)
+
+    // console.log('in function row', gridRowArr)
+    // console.log('in function col', gridColArr)
   }
+
+
   // useEffect(() => {
   //   check if winner
   //   setWinnter()
