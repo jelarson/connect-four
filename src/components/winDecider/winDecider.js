@@ -74,19 +74,63 @@ export default function useWinDecider(props) {
     //   }
     // }
     let startingGrid = grid.slice(0,gridCol-1).reverse()
-    let endingGrid = grid.slice(gridCol, 7).reverse()
+    let endingGrid = grid.slice(gridCol, 7)
+    let upLeftCounter = gridRow
     startingGrid.forEach(colArr => {
       if (gridCol > 0) {
-        gridDiagUpLeft.push(colArr[gridRow])
-        gridRow++
+        if (colArr[upLeftCounter] === undefined){
+
+        } else {
+          gridDiagUpLeft.push(colArr[upLeftCounter])
+          upLeftCounter++
+        }
       }
+      // gridRow = Number(nut[1])
     })
     // console.log('end grid', endingGrid)
     // console.log('start grid', startingGrid)
     console.log('grid up left', gridDiagUpLeft)
     let gridDiagDownRight = []
+    let downRightCounter = gridRow
+    endingGrid.forEach(colArr => {
+      if (gridCol <= 6) {
+        if (colArr[downRightCounter -2] === undefined){
+
+        } else {
+          gridDiagDownRight.push(colArr[downRightCounter -2])
+          downRightCounter--
+        }
+      }
+    })
+    console.log('down right', gridDiagDownRight)
+
     let gridDiagUpRight = []
+    let upRightCounter = gridRow
+      endingGrid.forEach(colArr => {
+        if (gridCol <= 6) {
+          if (colArr[upRightCounter] === undefined){
+
+          } else {
+            gridDiagUpRight.push(colArr[upRightCounter])
+            upRightCounter++
+          }
+        }
+      })
+    console.log('grid up right', gridDiagUpRight)
+
     let gridDiagDownLeft = []
+    let downLeftCounter = gridRow
+    startingGrid.forEach(colArr => {
+      if (gridCol > 0) {
+        if (colArr[downLeftCounter -2] === undefined){
+
+        } else {
+          gridDiagDownLeft.push(colArr[downLeftCounter -2])
+          downLeftCounter--
+        }
+      }
+    })
+    console.log('down left', gridDiagDownLeft)
 
     // grid.forEach(colArr => {
     //   gridRowArr.push(colArr[girdRow -1])
