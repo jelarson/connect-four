@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 
 export default function useWinDecider(props) {
   const [game, setGame] = useState([])
-  const [winner, setWinnter] = useState(false)
+  const [winner, setWinner] = useState(false)
 
   const [columnOneArr, setColumnOneArr] = useState([11,12,13,14,15,16])
   const [columnTwoArr, setColumnTwoArr] = useState([21,22,23,24,25,26])
@@ -159,12 +159,19 @@ export default function useWinDecider(props) {
 
       collectionArr.forEach(line => {
         if (line.length >= 4) {
-          if (line.join('').includes('redredredred') || line.join('').includes('yellowyellowyellowyellow')){
-            console.log('winner winner, chicken dinner')
-            console.log('winner winner, chicken dinner')
-            console.log('winner winner, chicken dinner')
-            console.log('winner winner, chicken dinner')
-            console.log('winner winner, chicken dinner')
+          if (line.join('').includes('redredredred')){
+            setTimeout(()=> {
+              alert('Player One Wins!')
+              setWinner(true)
+              // props.history.push('/')
+            }, 300)
+          }
+          if (line.join('').includes('yellowyellowyellowyellow')) {
+            setTimeout(()=> {
+              alert('Player Two Wins')
+              setWinner(true)
+              // props.history.push('/')
+            }, 300)
           }
         }
       })

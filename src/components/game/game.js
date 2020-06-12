@@ -41,13 +41,13 @@ flex-direction: row;
 justify-content: center;
 `;
 
-export default function Game() {
+export default function Game(props) {
   const { player} = useContext(UserContext);
 
   const {winner, updateGame} = useWinDecider()
-  // if(winner){
-    //do something
-  // }
+  if(winner){
+    props.history.push('/')
+  }
   console.log(winner)
   // console.log(updateGame)
   // updateGame(1,3)
