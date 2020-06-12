@@ -12,6 +12,10 @@ export default function useWinDecider(props) {
   const [columnSixArr, setColumnSixArr] = useState([61,62,63,64,65,66])
   const [columnSevenArr, setColumnSevenArr] = useState([71,72,73,74,75,76])
   const [almond, setAlmond] = useState([])
+  const [leftToRightDiag, setLeftToRightDiag] = useState([])
+  const [rightToLeftDiag, setRightToLeftDiag] = useState([])
+  const [horizontal, setHorizontal] = useState([])
+  const [vertical, setVertical] = useState([])
   const [grid, setGrid] = useState([
     [...columnOneArr],
     [...columnTwoArr],
@@ -64,10 +68,12 @@ export default function useWinDecider(props) {
     let gridCol = Number(nut[0])
     let gridRow = Number(nut[1])
     let gridColArr = grid[gridCol - 1]
+    // setHorizontal(gridColArr)
     // console.log('colly', gridColArr[gridRow - 1])
     let gridRowArr = grid.map(colArr => {
       return colArr[gridRow -1]
     })
+    // setVertical(gridRowArr)
     let gridDiagUpLeft = []
     let startingGrid = grid.slice(0,gridCol-1).reverse()
     let endingGrid = grid.slice(gridCol, 7)
@@ -124,27 +130,48 @@ export default function useWinDecider(props) {
         }
       }
     })
-    // console.log('down left', gridDiagDownLeft)
-    let leftToRightDiag = []
-    leftToRightDiag.push(...gridDiagUpLeft)
-    // leftToRightDiag.push(...grid[gridCol][gridRow])
-    leftToRightDiag.push(...gridDiagDownRight)
+    let leftToRightDiagArr = []
+    leftToRightDiagArr.push(...gridDiagUpLeft.reverse())
+    if (grid[gridCol - 1] !== undefined){
+      leftToRightDiagArr.push(grid[(gridCol - 1)][gridRow -1])
+    } else {
+      leftToRightDiagArr.push('green')
+    }
+    leftToRightDiagArr.push(...gridDiagDownRight)
+    console.log('LTR', leftToRightDiagArr)
+    
+    let rightToLeftDiagArr = []
+    rightToLeftDiagArr.push(...gridDiagDownLeft.reverse())
+    if (grid[gridCol - 1] !== undefined){
+      rightToLeftDiagArr.push(grid[(gridCol - 1)][gridRow -1])
+    } else {
+      rightToLeftDiagArr.push('green')
+    }
+    rightToLeftDiagArr.push(...gridDiagUpRight)
+    console.log('RTL', rightToLeftDiagArr)
+    
+    let collectionArr = []
+    collectionArr.push(gridColArr)
+    collectionArr.push(gridRowArr)
+    collectionArr.push(leftToRightDiagArr)
+    collectionArr.push(rightToLeftDiagArr)
+    if (collectionArr[0] !== undefined){
 
+      collectionArr.forEach(line => {
+        if (line.length >= 4) {
+          if (line.join('').includes('redredredred') || line.join('').includes('yellowyellowyellowyellow')){
+            console.log('winner winner, chicken dinner')
+            console.log('winner winner, chicken dinner')
+            console.log('winner winner, chicken dinner')
+            console.log('winner winner, chicken dinner')
+            console.log('winner winner, chicken dinner')
+          }
+        }
+      })
+    }
 
-   console.log('l to r', leftToRightDiag)
-  //  console.log('column', gridColArr[0])
-  console.log('GR', grid[(gridCol - 1)][0])
-
-
-    // console.log('in function row', gridRowArr)
-    // console.log('in function col', gridColArr)
   }
 
-
-  // useEffect(() => {
-  //   check if winner
-  //   setWinnter()
-  // }, [game])
   return {winner, updateGame}
 }
 
