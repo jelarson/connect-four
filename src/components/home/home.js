@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import { css } from "@emotion/core";
 // import "./home.scss";
@@ -40,26 +40,65 @@ margin-top: 40px;
       display: flex;
       flex-direction: row;
       justify-content: space-around;
-
-      .home-button {
-        margin-top: 34px;
-        padding: 12px;
-        border-radius: 10px;
-        background-color: #d00000;
-        font-size: 26px;
-        font-weight: 900;
-        color: #faa307;
-        text-decoration: none;
-
-        &:hover {
-          background-color: #faa307;
-          color: #d00000;
-        }
-      }
     }
 `;
 
+const homeButton = css`
+  margin-top: 34px;
+  padding: 12px;
+  border-radius: 10px;
+  background-color: #d00000;
+  font-size: 26px;
+  font-weight: 900;
+  color: #faa307;
+  text-decoration: none;
+  outline: none;
+  border-style: solid;
+
+  &:hover {
+    background-color: #faa307;
+    color: #d00000;
+  }
+`
+
+const twoPlayerGame = css`
+display: flex;
+flex-direction: column;
+align-items: center;
+`
+const twoPlayerGameInputWrapper = css`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+width: 100%;
+`
+const inputBox = css`
+font-size: 22px;
+border-radius: 15px;
+outline: none;
+margin-top: 25px;
+border: none;
+`
+
 export default function Home() {
+  const [onePlayVis, setOnePlayVis] = useState('none')
+  const [twoPlayVis, setTwoPlayVis] = useState('none')
+  const [playOneName, setPlayOneName] = useState('')
+  const [playTwoName, setPlayTwoName] = useState('')
+
+  function handleOnePlayButton () {
+    setPlayTwoName('Computer')
+    setPlayOneName('')
+    setTwoPlayVis('none')
+    setOnePlayVis('flex')
+  }
+  function handleTwoPlayButton () {
+    setPlayOneName('')
+    setPlayTwoName('')
+    setOnePlayVis('none')
+    setTwoPlayVis('flex')
+  }
+
   return (
     <div css={homeWrapperCss}>
       <div css={homeTitleCss}>
@@ -71,11 +110,47 @@ export default function Home() {
           Who would you like to play against?
         </div>
         <div className='home-button-wrapper'>
-          <Link to='/game' className='home-button'>
+          <button css={homeButton} onClick={handleTwoPlayButton}>
             Another Player
-          </Link>
-          <Link to='/game' className='home-button'>
+          </button>
+          <button css={homeButton} onClick={handleOnePlayButton}>
             The Computer
+          </button>
+        </div>
+        <div css={twoPlayerGame} style={{display: `${twoPlayVis}`}}>
+          <div css={twoPlayerGameInputWrapper}>
+          <form>
+            <input 
+            css={inputBox} 
+            placeholder=" Player One's Name" 
+            value={playOneName}
+            onChange={({ target }) => { setPlayOneName(target.value)}}>
+            </input>
+          </form>
+          <form>
+            <input 
+            css={inputBox} 
+            placeholder=" Player Two's Name" 
+            value={playTwoName}
+            onChange={({ target }) => { setPlayTwoName(target.value)}}>
+            </input>
+          </form>
+          </div>
+          <Link to='/game' css={homeButton} style={{borderStyle: 'none'}}>
+            Start Game
+          </Link>
+        </div>
+        <div css={twoPlayerGame} style={{display: `${onePlayVis}`}}>
+        <form>
+            <input 
+            css={inputBox} 
+            placeholder=' Your Name' 
+            value={playOneName}
+            onChange={({ target }) => { setPlayOneName(target.value)}}>
+            </input>
+          </form>
+          <Link to='/game' css={homeButton} style={{borderStyle: 'none'}}>
+            Start Game
           </Link>
         </div>
       </div>

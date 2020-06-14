@@ -1,16 +1,15 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { css } from "@emotion/core";
 
-import useWinDecider from '../winDecider/winDecider'
-import {UserContext} from '../context/context'
-
+// import useWinDecider from '../winDecider/winDecider'
+import { UserContext } from "../context/context";
 
 const columnWrapperCss = css`
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  .squareOne{
+  .squareOne {
     width: 80px;
     heigh: 80px;
     padding: 2px;
@@ -18,14 +17,13 @@ const columnWrapperCss = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     .circleOneRed {
       width: 65px;
       height: 65px;
       // border: 2px white solid;
       border-radius: 33px;
       background-color: #5465ff;
-      
     }
     .circleOneYellow {
       width: 65px;
@@ -33,18 +31,17 @@ const columnWrapperCss = css`
       // border: 2px white solid;
       border-radius: 33px;
       background-color: #5465ff;
-      
     }
   }
-  
+
   &:hover {
     .circleOneRed {
-    background-color: #d00000
-  }
-    .circleOneYellow {
-      background-color: #faa307
+      background-color: #d00000;
     }
-}
+    .circleOneYellow {
+      background-color: #faa307;
+    }
+  }
   .square {
     width: 80px;
     heigh: 80px;
@@ -79,76 +76,95 @@ const columnWrapperCss = css`
 `;
 
 export default function GameColumn(props) {
+  const { setPlayer } = useContext(UserContext);
+  const { player } = useContext(UserContext);
 
-  const {setPlayer} = useContext(UserContext)
-  const { player} = useContext(UserContext);
-
-  
   // const [turn, setTurn] = useState(player.turn)
-  const [clickCount, setClickCount] = useState(0)
-  const [rowsRemaining, setRowsRemaining] = useState(6)
-  const [circleOne, setCircleOne] = useState('circleOneRed')
-  const [activeClass1, setActiveClass1] = useState('circle')
-  const [activeClass2, setActiveClass2] = useState('circle')
-  const [activeClass3, setActiveClass3] = useState('circle')
-  const [activeClass4, setActiveClass4] = useState('circle')
-  const [activeClass5, setActiveClass5] = useState('circle')
-  const [activeClass6, setActiveClass6] = useState('circle')
+  const [clickCount, setClickCount] = useState(0);
+  const [rowsRemaining, setRowsRemaining] = useState(6);
+  const [circleOne, setCircleOne] = useState("circleOneRed");
+  const [activeClass1, setActiveClass1] = useState("circle");
+  const [activeClass2, setActiveClass2] = useState("circle");
+  const [activeClass3, setActiveClass3] = useState("circle");
+  const [activeClass4, setActiveClass4] = useState("circle");
+  const [activeClass5, setActiveClass5] = useState("circle");
+  const [activeClass6, setActiveClass6] = useState("circle");
 
-  let columnArr = [setActiveClass1, setActiveClass2, setActiveClass3, setActiveClass4, setActiveClass5, setActiveClass6]
+  let columnArr = [
+    setActiveClass1,
+    setActiveClass2,
+    setActiveClass3,
+    setActiveClass4,
+    setActiveClass5,
+    setActiveClass6,
+  ];
 
   // useEffect(() => {
   //   setTurn(props.player)
   // }, [])
-  
-  useEffect(()=>{
-    setCircleOne(player.turn === 'Player One' ? 'circleOneRed' : 'circleOneYellow')
-  }, [player])
 
-  function clickHandler () {
-      let time = 40
-      for(let i = 0; i < rowsRemaining - 1; i++){
-        setTimeout(() => {
-          columnArr[i](player.turn === 'Player One' ? 'circleRedActive' : 'circleYellowActive')
-        }, time * i)
-        setTimeout(() => {
-          columnArr[i]('circle')
-        }, time * i+1)
-          columnArr[i](player.turn === 'Player One' ? 'circleRedActive' : 'circleYellowActive')
-      }
-      columnArr[rowsRemaining - 1](player.turn === 'Player One' ? 'circleRedActive' : 'circleYellowActive')
-      setRowsRemaining(rowsRemaining - 1)
-      setPlayer(player.turn === 'Player One' ? 'Player Two' : 'Player One')
-      // setTurn(props.player)
-    setClickCount(clickCount + 1)
-    console.log('click', clickCount)
-    console.log(props.column)
-    props.updateFunc(props.column - 1, clickCount, player.turn === 'Player One' ? 'red' : 'yellow')
+  useEffect(() => {
+    setCircleOne(
+      player.turn === "Player One" ? "circleOneRed" : "circleOneYellow"
+    );
+  }, [player]);
+
+  function clickHandler() {
+    let time = 40;
+    for (let i = 0; i < rowsRemaining - 1; i++) {
+      setTimeout(() => {
+        columnArr[i](
+          player.turn === "Player One"
+            ? "circleRedActive"
+            : "circleYellowActive"
+        );
+      }, time * i);
+      setTimeout(() => {
+        columnArr[i]("circle");
+      }, time * i + 1);
+      columnArr[i](
+        player.turn === "Player One" ? "circleRedActive" : "circleYellowActive"
+      );
+    }
+    columnArr[rowsRemaining - 1](
+      player.turn === "Player One" ? "circleRedActive" : "circleYellowActive"
+    );
+    setRowsRemaining(rowsRemaining - 1);
+    setPlayer(player.turn === "Player One" ? "Player Two" : "Player One");
+    // setTurn(props.player)
+    setClickCount(clickCount + 1);
+    console.log("click", clickCount);
+    console.log(props.column);
+    props.updateFunc(
+      props.column - 1,
+      clickCount,
+      player.turn === "Player One" ? "red" : "yellow"
+    );
   }
 
-return (
-  <div css = {columnWrapperCss} onClick={clickHandler}>
-    <div className='squareOne'>
-      <div className={circleOne}/>
+  return (
+    <div css={columnWrapperCss} onClick={clickHandler}>
+      <div className='squareOne'>
+        <div className={circleOne} />
+      </div>
+      <div className='square'>
+        <div className={activeClass1} />
+      </div>
+      <div className='square'>
+        <div className={activeClass2} />
+      </div>
+      <div className='square'>
+        <div className={activeClass3} />
+      </div>
+      <div className='square'>
+        <div className={activeClass4} />
+      </div>
+      <div className='square'>
+        <div className={activeClass5} />
+      </div>
+      <div className='square'>
+        <div className={activeClass6} />
+      </div>
     </div>
-    <div className='square'>
-      <div className={activeClass1}/>
-    </div>
-    <div className='square'>
-    <div className={activeClass2}/>
-    </div>
-    <div className='square'>
-    <div className={activeClass3}/>
-    </div>
-    <div className='square'>
-    <div className={activeClass4}/>
-    </div>
-    <div className='square'>
-    <div className={activeClass5}/>
-    </div>
-    <div className='square'>
-    <div className={activeClass6}/>
-    </div>
-  </div>
-)
+  );
 }

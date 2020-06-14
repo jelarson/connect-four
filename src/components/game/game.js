@@ -1,10 +1,10 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { css } from "@emotion/core";
 
-import {UserContext} from '../context/context'
-import useWinDecider from '../winDecider/winDecider'
+import { UserContext } from "../context/context";
+import useWinDecider from "../winDecider/winDecider";
 
-import GameColumn from '../game-column/gameColumn'
+import GameColumn from "../game-column/gameColumn";
 
 const gamePageWrapperCss = css`
   display: flex;
@@ -32,50 +32,79 @@ const gamePageWrapperCss = css`
     font-weight: 900;
     color: #faa307;
   }
-
 `;
 
 const gameColumnWrapperCss = css`
-display: flex;
-flex-direction: row;
-justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 export default function Game(props) {
-  const { player} = useContext(UserContext);
+  const { player } = useContext(UserContext);
 
-  const {winner, updateGame} = useWinDecider()
-  if(winner){
-    props.history.push('/')
+  const { winner, updateGame } = useWinDecider();
+  if (winner) {
+    props.history.push("/");
   }
-  console.log(winner)
-  // console.log(updateGame)
-  // updateGame(1,3)
- 
-  const [playerColor, setPlayerColor] = useState('#d00000')
+  console.log(winner);
 
+  const [playerColor, setPlayerColor] = useState("#d00000");
 
   useEffect(() => {
-    setPlayerColor(player.turn === 'Player One' ? '#d00000' : '#faa307')
-  }, [player])
+    setPlayerColor(player.turn === "Player One" ? "#d00000" : "#faa307");
+  }, [player]);
 
-return (
-  <div css ={gamePageWrapperCss}>
-    <div className='page-title'>
-      Connect 4
+  return (
+    <div css={gamePageWrapperCss}>
+      <div className='page-title'>Connect 4</div>
+      <div css={gameColumnWrapperCss}>
+        <GameColumn
+          className='column c-one'
+          player={player.turn}
+          column={1}
+          updateFunc={updateGame}
+        />
+        <GameColumn
+          className='column c-two'
+          player={player.turn}
+          column={2}
+          updateFunc={updateGame}
+        />
+        <GameColumn
+          className='column c-three'
+          player={player.turn}
+          column={3}
+          updateFunc={updateGame}
+        />
+        <GameColumn
+          className='column c-four'
+          player={player.turn}
+          column={4}
+          updateFunc={updateGame}
+        />
+        <GameColumn
+          className='column c-five'
+          player={player.turn}
+          column={5}
+          updateFunc={updateGame}
+        />
+        <GameColumn
+          className='column c-six'
+          player={player.turn}
+          column={6}
+          updateFunc={updateGame}
+        />
+        <GameColumn
+          className='column c-seven'
+          player={player.turn}
+          column={7}
+          updateFunc={updateGame}
+        />
+      </div>
+      <div className='turn-tracker'>
+        It is <span style={{ color: playerColor }}>{player.turn}'s</span> turn
+      </div>
     </div>
-    <div css ={gameColumnWrapperCss}>
-      <GameColumn className='column c-one' player={player.turn} column={1} updateFunc={updateGame}/>
-      <GameColumn className='column c-two' player={player.turn} column={2} updateFunc={updateGame}/>
-      <GameColumn className='column c-three' player={player.turn} column={3} updateFunc={updateGame}/>
-      <GameColumn className='column c-four' player={player.turn} column={4} updateFunc={updateGame}/>
-      <GameColumn className='column c-five' player={player.turn} column={5} updateFunc={updateGame}/>
-      <GameColumn className='column c-six' player={player.turn} column={6} updateFunc={updateGame}/>
-      <GameColumn className='column c-seven' player={player.turn} column={7} updateFunc={updateGame}/>
-    </div>
-    <div className='turn-tracker'>
-It is <span style={{color: playerColor}}>{player.turn}'s</span> turn
-    </div>
-  </div>
-)
+  );
 }
