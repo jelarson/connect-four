@@ -26,6 +26,7 @@
     "@babel/preset-react": "^7.10.1",
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.28",
+    "axios": "^0.19.2",
     "babel-loader": "^8.0.0",
     "clean-webpack-plugin": "^0.1.16",
     "copy-webpack-plugin": "^4.5.2",

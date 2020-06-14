@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { css } from "@emotion/core";
 
 const homeWrapperCss = css`
@@ -13,33 +14,33 @@ const homeWrapperCss = css`
 `;
 
 const homeTitleCss = css`
-margin-top: 25px;
-font-size: 4em;
-color: #faa307;
-font-weight: 900;
-text-align: center;
-span {
-  color: #d00000;
-}
+  margin-top: 25px;
+  font-size: 4em;
+  color: #faa307;
+  font-weight: 900;
+  text-align: center;
+  span {
+    color: #d00000;
+  }
 `;
 
 const homeButtonChoiceWrapper = css`
-margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-    .home-button-message {
-      text-align: center;
-      font-size: 2.4em;
-      color: #faa307;
-    }
-    .home-button-wrapper {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-    }
+  .home-button-message {
+    text-align: center;
+    font-size: 2.4em;
+    color: #faa307;
+  }
+  .home-button-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
 `;
 
 const homeButton = css`
@@ -58,55 +59,59 @@ const homeButton = css`
     background-color: #faa307;
     color: #d00000;
   }
-`
+`;
 
 const twoPlayerGame = css`
-display: flex;
-flex-direction: column;
-align-items: center;
-`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 const twoPlayerGameInputWrapper = css`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-width: 100%;
-`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+`;
 const inputBox = css`
-font-size: 22px;
-border-radius: 15px;
-outline: none;
-margin-top: 25px;
-border: none;
-`
+  font-size: 22px;
+  border-radius: 15px;
+  outline: none;
+  margin-top: 25px;
+  border: none;
+`;
 
 export default function Home(props) {
-  const [onePlayVis, setOnePlayVis] = useState('none')
-  const [twoPlayVis, setTwoPlayVis] = useState('none')
-  const [playOneName, setPlayOneName] = useState('')
-  const [playTwoName, setPlayTwoName] = useState('')
-  const [gamepath, setGamePath] = useState('/')
+  const [onePlayVis, setOnePlayVis] = useState("none");
+  const [twoPlayVis, setTwoPlayVis] = useState("none");
+  const [playOneName, setPlayOneName] = useState("");
+  const [playTwoName, setPlayTwoName] = useState("");
+  const [gamepath, setGamePath] = useState("/");
 
-  function handleOnePlayButton () {
-    setPlayTwoName('Computer')
-    setPlayOneName('')
-    setTwoPlayVis('none')
-    setOnePlayVis('flex')
+  axios
+    .post("https://jel-connect-four-scores.herokuapp.com/wakeup", {})
+    .then((response) => console.log("Are you awake yet?      ", response.data));
+
+  function handleOnePlayButton() {
+    setPlayTwoName("The Computer");
+    setPlayOneName("");
+    setTwoPlayVis("none");
+    setOnePlayVis("flex");
   }
-  function handleTwoPlayButton () {
-    setPlayOneName('')
-    setPlayTwoName('')
-    setOnePlayVis('none')
-    setTwoPlayVis('flex')
+  function handleTwoPlayButton() {
+    setPlayOneName("");
+    setPlayTwoName("");
+    setOnePlayVis("none");
+    setTwoPlayVis("flex");
   }
 
-  function linkClick () {
-    if (playOneName !== '' && playTwoName !== ''){
-      props.history.push('/game', {
+  function linkClick() {
+    if (playOneName !== "" && playTwoName !== "") {
+      props.history.push("/game", {
         playerOneName: playOneName,
-        playerTwoName: playTwoName
-      })
+        playerTwoName: playTwoName,
+      });
     } else {
-      alert('Please fill in all required fields')
+      alert("Please fill in all required fields");
     }
   }
 
@@ -128,39 +133,53 @@ export default function Home(props) {
             The Computer
           </button>
         </div>
-        <div css={twoPlayerGame} style={{display: `${twoPlayVis}`}}>
+        <div css={twoPlayerGame} style={{ display: `${twoPlayVis}` }}>
           <div css={twoPlayerGameInputWrapper}>
-          <form>
-            <input 
-            css={inputBox} 
-            placeholder=" Player One's Name" 
-            value={playOneName}
-            onChange={({ target }) => { setPlayOneName(target.value)}}>
-            </input>
-          </form>
-          <form>
-            <input 
-            css={inputBox} 
-            placeholder=" Player Two's Name" 
-            value={playTwoName}
-            onChange={({ target }) => { setPlayTwoName(target.value)}}>
-            </input>
-          </form>
+            <form>
+              <input
+                css={inputBox}
+                placeholder=" Player One's Name"
+                value={playOneName}
+                onChange={({ target }) => {
+                  setPlayOneName(target.value);
+                }}
+              ></input>
+            </form>
+            <form>
+              <input
+                css={inputBox}
+                placeholder=" Player Two's Name"
+                value={playTwoName}
+                onChange={({ target }) => {
+                  setPlayTwoName(target.value);
+                }}
+              ></input>
+            </form>
           </div>
-          <button onClick={linkClick} css={homeButton} style={{borderStyle: 'none'}}>
+          <button
+            onClick={linkClick}
+            css={homeButton}
+            style={{ borderStyle: "none" }}
+          >
             Start Game
           </button>
         </div>
-        <div css={twoPlayerGame} style={{display: `${onePlayVis}`}}>
-        <form>
-            <input 
-            css={inputBox} 
-            placeholder=' Your Name' 
-            value={playOneName}
-            onChange={({ target }) => { setPlayOneName(target.value)}}>
-            </input>
+        <div css={twoPlayerGame} style={{ display: `${onePlayVis}` }}>
+          <form>
+            <input
+              css={inputBox}
+              placeholder=' Your Name'
+              value={playOneName}
+              onChange={({ target }) => {
+                setPlayOneName(target.value);
+              }}
+            ></input>
           </form>
-          <button onClick={linkClick} css={homeButton} style={{borderStyle: 'none'}}>
+          <button
+            onClick={linkClick}
+            css={homeButton}
+            style={{ borderStyle: "none" }}
+          >
             Start Game
           </button>
         </div>

@@ -79,8 +79,8 @@ export default function GameColumn(props) {
   const { setPlayer } = useContext(UserContext);
   const { player } = useContext(UserContext);
 
-  const playerOneName = props.playerOneName;
-  const playerTwoName = props.playerTwoName;
+  // const playerOneName = props.playerOneName;
+  // const playerTwoName = props.playerTwoName;
   // const [turn, setTurn] = useState(player.turn)
   const [clickCount, setClickCount] = useState(0);
   const [rowsRemaining, setRowsRemaining] = useState(6);
