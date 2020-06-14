@@ -42,15 +42,17 @@ const gameColumnWrapperCss = css`
 
 export default function Game(props) {
   console.log(props.location.state);
-
+  const { setPlayer } = useContext(UserContext);
   const { player } = useContext(UserContext);
-
+  const playerOneName = props.location.state.playerOneName;
+  const playerTwoName = props.location.state.playerTwoName;
   const { winner, updateGame } = useWinDecider();
   if (winner) {
     props.history.push("/");
   }
   console.log(winner);
 
+  // setPlayer(playerOneName);
   const [playerColor, setPlayerColor] = useState("#d00000");
 
   useEffect(() => {
@@ -64,48 +66,69 @@ export default function Game(props) {
         <GameColumn
           className='column c-one'
           player={player.turn}
+          playerOneName={playerOneName}
+          playerTwoName={playerTwoName}
           column={1}
           updateFunc={updateGame}
         />
         <GameColumn
           className='column c-two'
           player={player.turn}
+          playerOneName={playerOneName}
+          playerTwoName={playerTwoName}
           column={2}
           updateFunc={updateGame}
         />
         <GameColumn
           className='column c-three'
           player={player.turn}
+          playerOneName={playerOneName}
+          playerTwoName={playerTwoName}
           column={3}
           updateFunc={updateGame}
         />
         <GameColumn
           className='column c-four'
           player={player.turn}
+          playerOneName={playerOneName}
+          playerTwoName={playerTwoName}
           column={4}
           updateFunc={updateGame}
         />
         <GameColumn
           className='column c-five'
           player={player.turn}
+          playerOneName={playerOneName}
+          playerTwoName={playerTwoName}
           column={5}
           updateFunc={updateGame}
         />
         <GameColumn
           className='column c-six'
           player={player.turn}
+          playerOneName={playerOneName}
+          playerTwoName={playerTwoName}
           column={6}
           updateFunc={updateGame}
         />
         <GameColumn
           className='column c-seven'
           player={player.turn}
+          playerOneName={playerOneName}
+          playerTwoName={playerTwoName}
           column={7}
           updateFunc={updateGame}
         />
       </div>
       <div className='turn-tracker'>
-        It is <span style={{ color: playerColor }}>{player.turn}'s</span> turn
+        It is{" "}
+        <span style={{ color: playerColor }}>
+          {player.turn === "Player One"
+            ? props.location.state.playerOneName
+            : props.location.state.playerTwoName}
+          's
+        </span>{" "}
+        turn
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
 import { css } from "@emotion/core";
-// import "./home.scss";
+
 const homeWrapperCss = css`
   width: 100vw;
   height: 100vh;
@@ -103,8 +102,8 @@ export default function Home(props) {
   function linkClick () {
     if (playOneName !== '' && playTwoName !== ''){
       props.history.push('/game', {
-        playerOneNamee: playOneName,
-        playerTwoNamee: playTwoName
+        playerOneName: playOneName,
+        playerTwoName: playTwoName
       })
     } else {
       alert('Please fill in all required fields')
@@ -161,9 +160,6 @@ export default function Home(props) {
             onChange={({ target }) => { setPlayOneName(target.value)}}>
             </input>
           </form>
-          {/* <Link onClick={linkClick} to={gamepath} css={homeButton} style={{borderStyle: 'none'}}>
-            Start Game
-          </Link> */}
           <button onClick={linkClick} css={homeButton} style={{borderStyle: 'none'}}>
             Start Game
           </button>
