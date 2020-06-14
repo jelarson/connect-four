@@ -41,6 +41,8 @@ const gameColumnWrapperCss = css`
 `;
 
 export default function Game(props) {
+  console.log(props.location.state);
+
   const { player } = useContext(UserContext);
 
   const { winner, updateGame } = useWinDecider();

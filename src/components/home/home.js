@@ -80,11 +80,12 @@ margin-top: 25px;
 border: none;
 `
 
-export default function Home() {
+export default function Home(props) {
   const [onePlayVis, setOnePlayVis] = useState('none')
   const [twoPlayVis, setTwoPlayVis] = useState('none')
   const [playOneName, setPlayOneName] = useState('')
   const [playTwoName, setPlayTwoName] = useState('')
+  const [gamepath, setGamePath] = useState('/')
 
   function handleOnePlayButton () {
     setPlayTwoName('Computer')
@@ -97,6 +98,17 @@ export default function Home() {
     setPlayTwoName('')
     setOnePlayVis('none')
     setTwoPlayVis('flex')
+  }
+
+  function linkClick () {
+    if (playOneName !== '' && playTwoName !== ''){
+      props.history.push('/game', {
+        playerOneNamee: playOneName,
+        playerTwoNamee: playTwoName
+      })
+    } else {
+      alert('Please fill in all required fields')
+    }
   }
 
   return (
@@ -136,9 +148,9 @@ export default function Home() {
             </input>
           </form>
           </div>
-          <Link to='/game' css={homeButton} style={{borderStyle: 'none'}}>
+          <button onClick={linkClick} css={homeButton} style={{borderStyle: 'none'}}>
             Start Game
-          </Link>
+          </button>
         </div>
         <div css={twoPlayerGame} style={{display: `${onePlayVis}`}}>
         <form>
@@ -149,9 +161,12 @@ export default function Home() {
             onChange={({ target }) => { setPlayOneName(target.value)}}>
             </input>
           </form>
-          <Link to='/game' css={homeButton} style={{borderStyle: 'none'}}>
+          {/* <Link onClick={linkClick} to={gamepath} css={homeButton} style={{borderStyle: 'none'}}>
             Start Game
-          </Link>
+          </Link> */}
+          <button onClick={linkClick} css={homeButton} style={{borderStyle: 'none'}}>
+            Start Game
+          </button>
         </div>
       </div>
     </div>
