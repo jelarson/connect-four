@@ -48,7 +48,7 @@ export default function Game(props) {
   const playerTwoName = props.location.state.playerTwoName;
   const { winner, updateGame } = useWinDecider();
   if (winner) {
-    props.history.push("/");
+    props.history.push("/highscores");
   }
   console.log(winner);
 
