@@ -4,6 +4,8 @@ export default function useWinDecider() {
   const [game, setGame] = useState([]);
   const [winner, setWinner] = useState(false);
 
+  const [playerOne, setPlayerOne] = useState("1");
+  const [playerTwo, setPlayerTwo] = useState("2");
   const [columnOneArr, setColumnOneArr] = useState([11, 12, 13, 14, 15, 16]);
   const [columnTwoArr, setColumnTwoArr] = useState([21, 22, 23, 24, 25, 26]);
   const [columnThreeArr, setColumnThreeArr] = useState([
@@ -79,9 +81,11 @@ export default function useWinDecider() {
     setColumnSevenArr,
   ];
 
-  const updateGame = (column, row, turn) => {
+  const updateGame = (column, row, turn, playerOneName, playerTwoName) => {
     let peanut = columnArr[column];
     setAlmond(String(peanut[row]).split(""));
+    setPlayerOne(playerOneName);
+    setPlayerTwo(playerTwoName);
     peanut[row] = turn;
     setterArr[column](peanut);
   };
@@ -176,13 +180,13 @@ export default function useWinDecider() {
         if (line.length >= 4) {
           if (line.join("").includes("redredredred")) {
             setTimeout(() => {
-              alert("Player One Wins!");
+              alert(`${playerOne} Wins!`);
               setWinner(true);
             }, 300);
           }
           if (line.join("").includes("yellowyellowyellowyellow")) {
             setTimeout(() => {
-              alert("Player Two Wins");
+              alert(`${playerTwo} Wins`);
               setWinner(true);
             }, 300);
           }

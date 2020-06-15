@@ -140,7 +140,9 @@ export default function GameColumn(props) {
     props.updateFunc(
       props.column - 1,
       clickCount,
-      player.turn === "Player One" ? "red" : "yellow"
+      player.turn === "Player One" ? "red" : "yellow",
+      props.playerOneName,
+      props.playerTwoName
     );
   }
 
