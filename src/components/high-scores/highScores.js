@@ -52,7 +52,29 @@ const highScoreMessageCss = css`
   font-weight: 900;
 `;
 
+const playAgainButtonCss = css`
+  margin-top: 34px;
+  padding: 12px;
+  border-radius: 10px;
+  background-color: #d00000;
+  font-size: 26px;
+  font-weight: 900;
+  color: #faa307;
+  text-decoration: none;
+  outline: none;
+  border-style: solid;
+
+  &:hover {
+    background-color: #faa307;
+    color: #d00000;
+  }
+`;
+
 export default function HighScores(props) {
+  function handleClick() {
+    props.history.push("/");
+  }
+
   return (
     <div css={highScorePageWrapperCss}>
       <div css={highScoreTitleCss}>Top Ten High Scores</div>
@@ -87,6 +109,9 @@ export default function HighScores(props) {
       <div css={highScoreMessageCss}>
         You did/did not make it on the leaderboard
       </div>
+      <button css={playAgainButtonCss} onClick={handleClick}>
+        Play Again?
+      </button>
     </div>
   );
 }
