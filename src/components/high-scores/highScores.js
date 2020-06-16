@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { css } from "@emotion/core";
+import axios from "axios";
 
 const highScorePageWrapperCss = css`
   display: flex;
@@ -71,9 +72,40 @@ const playAgainButtonCss = css`
 `;
 
 export default function HighScores(props) {
+  const [scoresArr, setScoresArr] = useState([]);
+  const [topTenArr, setTopTenArr] = useState([]);
+
   function handleClick() {
     props.history.push("/");
   }
+
+  useEffect(() => {
+    axios
+      .get(`https://jel-connect-four-scores.herokuapp.com/scores`)
+      .then((response) => setScoresArr(response.data))
+      .catch((err) => console.log("error", err));
+  }, []);
+
+  useEffect(() => {
+    let tempArr = [];
+    scoresArr.forEach((obj) => {
+      tempArr.push(obj.highScore);
+    });
+    tempArr.sort((a, b) => a - b);
+    let tempArr2 = [];
+    tempArr.slice(0, 10).forEach((score) => {
+      scoresArr.forEach((obj) => {
+        if (obj.highScore === score) {
+          tempArr2.push(obj);
+        }
+      });
+    });
+    setTopTenArr([...new Set(tempArr2)].slice(0, 10));
+  }, [scoresArr]);
+
+  useEffect(() => {
+    console.log("top ten", topTenArr);
+  }, [topTenArr]);
 
   return (
     <div css={highScorePageWrapperCss}>
@@ -81,6 +113,7 @@ export default function HighScores(props) {
       <div css={scoreBoxCss}>
         <div css={scoreNamesCss}>
           <ol>
+            {/* <li>{topTenArr[0].name}</li> */}
             <li>Name: placeholder</li>
             <li>Name: placeholder</li>
             <li>Name: placeholder</li>
