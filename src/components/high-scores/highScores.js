@@ -128,6 +128,14 @@ export default function HighScores(props) {
     }
   }
 
+  function liScore(num) {
+    if (topTenArr.length > 0) {
+      return <div> {topTenArr[num].highScore}</div>;
+    } else {
+      return <div> Loading ...</div>;
+    }
+  }
+
   return (
     <div css={highScorePageWrapperCss}>
       <div css={highScoreTitleCss}>Top Ten High Scores</div>
@@ -150,16 +158,16 @@ export default function HighScores(props) {
           </ol>
         </div>
         <div css={scoresColumnCss}>
-          <div>placeholder</div>
-          <div>placeholder</div>
-          <div>placeholder</div>
-          <div>placeholder</div>
-          <div>placeholder</div>
-          <div>placeholder</div>
-          <div>placeholder</div>
-          <div>placeholder</div>
-          <div>placeholder</div>
-          <div>placeholder</div>
+          {liScore(0)}
+          {liScore(1)}
+          {liScore(2)}
+          {liScore(3)}
+          {liScore(4)}
+          {liScore(5)}
+          {liScore(6)}
+          {liScore(7)}
+          {liScore(8)}
+          {liScore(9)}
         </div>
       </div>
       <div css={highScoreMessageCss}>
