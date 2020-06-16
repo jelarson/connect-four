@@ -73,7 +73,19 @@ const playAgainButtonCss = css`
 
 export default function HighScores(props) {
   const [scoresArr, setScoresArr] = useState([]);
-  const [topTenArr, setTopTenArr] = useState([]);
+  const [topTenArr, setTopTenArr] = useState([
+    { name: "Loading", highScore: "Loading" },
+    { name: "Loading", highScore: "Loading" },
+    { name: "Loading", highScore: "Loading" },
+    { name: "Loading", highScore: "Loading" },
+    { name: "Loading", highScore: "Loading" },
+    { name: "Loading", highScore: "Loading" },
+    { name: "Loading", highScore: "Loading" },
+    { name: "Loading", highScore: "Loading" },
+    { name: "Loading", highScore: "Loading" },
+    { name: "Loading", highScore: "Loading" },
+  ]);
+  // const [isLoading, setIsLoading] = useState(true);
 
   function handleClick() {
     props.history.push("/");
@@ -101,11 +113,20 @@ export default function HighScores(props) {
       });
     });
     setTopTenArr([...new Set(tempArr2)].slice(0, 10));
+    // setIsLoading(false);
   }, [scoresArr]);
 
   useEffect(() => {
     console.log("top ten", topTenArr);
   }, [topTenArr]);
+
+  function liName(num) {
+    if (topTenArr.length > 0) {
+      return <li> {topTenArr[num].name}</li>;
+    } else {
+      return <li> Loading...</li>;
+    }
+  }
 
   return (
     <div css={highScorePageWrapperCss}>
@@ -114,16 +135,18 @@ export default function HighScores(props) {
         <div css={scoreNamesCss}>
           <ol>
             {/* <li>{topTenArr[0].name}</li> */}
-            <li>Name: placeholder</li>
-            <li>Name: placeholder</li>
-            <li>Name: placeholder</li>
-            <li>Name: placeholder</li>
-            <li>Name: placeholder</li>
-            <li>Name: placeholder</li>
-            <li>Name: placeholder</li>
-            <li>Name: placeholder</li>
-            <li>Name: placeholder</li>
-            <li>Name: placeholder</li>
+            {/* <li>Name: {topTenArr[0].highScore}</li> */}
+            {/* <li>Name: placeholder</li> */}
+            {liName(0)}
+            {liName(1)}
+            {liName(2)}
+            {liName(3)}
+            {liName(4)}
+            {liName(5)}
+            {liName(6)}
+            {liName(7)}
+            {liName(8)}
+            {liName(9)}
           </ol>
         </div>
         <div css={scoresColumnCss}>
