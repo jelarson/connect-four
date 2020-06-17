@@ -51,6 +51,7 @@ const highScoreMessageCss = css`
   margin-top: 15px;
   color: #faa307;
   font-weight: 900;
+  text-align: center;
 `;
 
 const playAgainButtonCss = css`
@@ -85,7 +86,8 @@ export default function HighScores(props) {
     { name: "Loading", highScore: "Loading" },
     { name: "Loading", highScore: "Loading" },
   ]);
-  // const [isLoading, setIsLoading] = useState(true);
+  const [leaderboard, setLeaderboard] = useState(true);
+  const [turns, setTurns] = useState("9");
 
   function handleClick() {
     props.history.push("/");
@@ -171,7 +173,11 @@ export default function HighScores(props) {
         </div>
       </div>
       <div css={highScoreMessageCss}>
-        You did/did not make it on the leaderboard
+        {leaderboard
+          ? "You made it onto the Leaderboard!"
+          : "You did not make it onto the leaderboard"}
+        <br />
+        You won in {turns} turns.
       </div>
       <button css={playAgainButtonCss} onClick={handleClick}>
         Play Again?

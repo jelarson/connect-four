@@ -4,18 +4,23 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [player, setState] = useState({
-    turn: 'Player One'
+    turn: "Player One",
+    // count: "0",
   });
 
   // const actions = {
-  //   setPlayer: (amt) => setState({... state, turn: amt})
-  // }
+  //   setTurn: (amt) => setState({ ...state, turn: amt }),
+  //   setCount: (amt) => setState({ ...state, count: amt }),
+  // };
   const setPlayer = (value) => {
     setState({
-      turn: value
-    })}
+      turn: value,
+      count: value,
+    });
+  };
 
   return (
+    // <UserContext.Provider value={{ player, actions }}>
     <UserContext.Provider value={{ player, setPlayer }}>
       {children}
     </UserContext.Provider>

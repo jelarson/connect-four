@@ -78,7 +78,9 @@ const columnWrapperCss = css`
 export default function GameColumn(props) {
   const { setPlayer } = useContext(UserContext);
   const { player } = useContext(UserContext);
-
+  // const { turn, setTurn } = useState(player.turn);
+  // const { count, setCount } = useState(player.count);
+  // console.log(player);
   // const playerOneName = props.playerOneName;
   // const playerTwoName = props.playerTwoName;
   // const [turn, setTurn] = useState(player.turn)
@@ -133,6 +135,9 @@ export default function GameColumn(props) {
     );
     setRowsRemaining(rowsRemaining - 1);
     setPlayer(player.turn === "Player One" ? "Player Two" : "Player One");
+    // setTurn(turn === "Player One" ? "Player Two" : "Player One");
+    // setCount(String(Number(count) + 1));
+    // setPlayer(String(Number(player.count) + 1));
     // setTurn(props.player)
     setClickCount(clickCount + 1);
     console.log("click", clickCount);

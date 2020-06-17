@@ -24,9 +24,18 @@ const gamePageWrapperCss = css`
     text-align: center;
   }
 
-  .turn-tracker {
+  .turn-name-tracker {
     position: absolute;
     top: 15px;
+    right: 30px;
+    font-size: 1.2em;
+    font-weight: 900;
+    color: #faa307;
+  }
+
+  .turn-count-tracker {
+    position: absolute;
+    top: 35px;
     right: 30px;
     font-size: 1.2em;
     font-weight: 900;
@@ -120,7 +129,7 @@ export default function Game(props) {
           updateFunc={updateGame}
         />
       </div>
-      <div className='turn-tracker'>
+      <div className='turn-name-tracker'>
         It is{" "}
         <span style={{ color: playerColor }}>
           {player.turn === "Player One"
@@ -130,6 +139,7 @@ export default function Game(props) {
         </span>{" "}
         turn
       </div>
+      <div className='turn-count-tracker'>turns: {player.count}</div>
     </div>
   );
 }
