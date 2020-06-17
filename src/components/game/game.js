@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { css } from "@emotion/core";
 
 import { UserContext } from "../context/context";
+import { UserContextTurn } from "../context/turnContext";
 import useWinDecider from "../winDecider/winDecider";
 
 import GameColumn from "../game-column/gameColumn";
@@ -50,8 +51,9 @@ const gameColumnWrapperCss = css`
 `;
 
 export default function Game(props) {
-  console.log(props.location.state);
-  const { setPlayer } = useContext(UserContext);
+  // console.log(props.location.state);
+  // const { turnCount } = useContext(UserContextTurn);
+  // const { setPlayer } = useContext(UserContext);
   const { player } = useContext(UserContext);
   const playerOneName = props.location.state.playerOneName;
   const playerTwoName = props.location.state.playerTwoName;
@@ -139,7 +141,7 @@ export default function Game(props) {
         </span>{" "}
         turn
       </div>
-      <div className='turn-count-tracker'>turns: {player.count}</div>
+      {/* <div className='turn-count-tracker'>turns: {turnCount}</div> */}
     </div>
   );
 }
