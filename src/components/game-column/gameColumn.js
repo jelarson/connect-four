@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { css } from "@emotion/core";
 
-// import useWinDecider from '../winDecider/winDecider'
 import { UserContext } from "../context/context";
 import { UserContextTurn } from "../context/turnContext";
 
@@ -81,12 +80,6 @@ export default function GameColumn(props) {
   const { player } = useContext(UserContext);
   // const { turnCount } = useContext(UserContextTurn);
   // const { setTurnCount } = useContext(UserContextTurn);
-  // const { turn, setTurn } = useState(player.turn);
-  // const { count, setCount } = useState(player.count);
-  // console.log(player);
-  // const playerOneName = props.playerOneName;
-  // const playerTwoName = props.playerTwoName;
-  // const [turn, setTurn] = useState(player.turn)
   const [clickCount, setClickCount] = useState(0);
   const [rowsRemaining, setRowsRemaining] = useState(6);
   const [circleOne, setCircleOne] = useState("circleOneRed");
@@ -139,13 +132,8 @@ export default function GameColumn(props) {
     setRowsRemaining(rowsRemaining - 1);
     setPlayer(player.turn === "Player One" ? "Player Two" : "Player One");
     // setTurnCount(turnCount.count + 1);
-    // setTurn(turn === "Player One" ? "Player Two" : "Player One");
-    // setCount(String(Number(count) + 1));
-    // setPlayer(String(Number(player.count) + 1));
-    // setTurn(props.player)
     setClickCount(clickCount + 1);
-    console.log("click", clickCount);
-    console.log(props.column);
+
     props.updateFunc(
       props.column - 1,
       clickCount,
