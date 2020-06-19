@@ -5,10 +5,12 @@ import { UserProvider } from './context/context'
 import Home from "./home/home";
 import Game from './game/game';
 import HighScores from './high-scores/highScores'
+import { UserProviderTurn } from "./context/turnContext";
 
 export default function App() {
     return (
       <div className="app">
+        <UserProviderTurn>
         <UserProvider>
         <Router>
           <div className='app-wrapper'>
@@ -20,6 +22,7 @@ export default function App() {
           </div>
         </Router>
         </UserProvider>
+        </UserProviderTurn>
       </div>
     );
   }

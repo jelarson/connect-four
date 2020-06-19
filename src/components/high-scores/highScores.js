@@ -119,7 +119,7 @@ export default function HighScores(props) {
   }, [scoresArr]);
 
   useEffect(() => {
-    console.log("top ten", topTenArr);
+    // console.log("top ten", topTenArr);
   }, [topTenArr]);
 
   function liName(num) {

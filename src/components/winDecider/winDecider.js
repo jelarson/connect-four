@@ -38,7 +38,7 @@ export default function useWinDecider() {
     [...columnSevenArr],
   ]);
 
-  console.log("before grid", grid);
+  // console.log("before grid", grid);
 
   useEffect(() => {
     setGrid([
@@ -51,7 +51,7 @@ export default function useWinDecider() {
       columnSevenArr,
     ]);
 
-    return () => console.log("unmounted");
+    // return () => console.log("unmounted");
   }, [
     columnOneArr,
     columnTwoArr,
@@ -158,7 +158,7 @@ export default function useWinDecider() {
       leftToRightDiagArr.push("green");
     }
     leftToRightDiagArr.push(...gridDiagDownRight);
-    console.log("LTR", leftToRightDiagArr);
+    // console.log("LTR", leftToRightDiagArr);
 
     let rightToLeftDiagArr = [];
     rightToLeftDiagArr.push(...gridDiagDownLeft.reverse());
@@ -168,7 +168,7 @@ export default function useWinDecider() {
       rightToLeftDiagArr.push("green");
     }
     rightToLeftDiagArr.push(...gridDiagUpRight);
-    console.log("RTL", rightToLeftDiagArr);
+    // console.log("RTL", rightToLeftDiagArr);
 
     let collectionArr = [];
     collectionArr.push(gridColArr);

@@ -2,7 +2,7 @@ import React, { useState, createContext } from "react";
 
 export const UserContextTurn = createContext();
 
-export const UserProvider = ({ children }) => {
+export const UserProviderTurn = ({ children }) => {
   const [turnCount, setState] = useState({
     count: 0
   });

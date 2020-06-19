@@ -76,8 +76,8 @@ const columnWrapperCss = css`
 `;
 
 export default function GameColumn(props) {
-  const { setPlayer } = useContext(UserContext);
-  const { player } = useContext(UserContext);
+  // const { setPlayer } = useContext(UserContext);
+  const { player, actions } = useContext(UserContext);
   // const { turnCount } = useContext(UserContextTurn);
   // const { setTurnCount } = useContext(UserContextTurn);
   const [clickCount, setClickCount] = useState(0);
@@ -130,8 +130,11 @@ export default function GameColumn(props) {
       player.turn === "Player One" ? "circleRedActive" : "circleYellowActive"
     );
     setRowsRemaining(rowsRemaining - 1);
-    setPlayer(player.turn === "Player One" ? "Player Two" : "Player One");
-    // setTurnCount(turnCount.count + 1);
+    actions.setCount(player.count + 1);
+    actions.setPlayer(
+      player.turn === "Player One" ? "Player Two" : "Player One"
+    );
+    console.log(player.turn);
     setClickCount(clickCount + 1);
 
     props.updateFunc(

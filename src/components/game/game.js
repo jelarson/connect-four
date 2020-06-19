@@ -62,7 +62,7 @@ export default function Game(props) {
   if (winner) {
     props.history.push("/highscores");
   }
-  console.log(winner);
+  // console.log(winner);
 
   // setPlayer(playerOneName);
   const [playerColor, setPlayerColor] = useState("#d00000");
@@ -142,7 +142,7 @@ export default function Game(props) {
         </span>{" "}
         turn
       </div>
-      {/* <div className='turn-count-tracker'>turns: {turnCount}</div> */}
+      <div className='turn-count-tracker'>turns: {player.count}</div>
     </div>
   );
 }
