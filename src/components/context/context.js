@@ -5,7 +5,7 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [player, setState] = useState({
     turn: "Player One",
-    // count: "0",
+    // count: 0,
   });
 
   // const actions = {
