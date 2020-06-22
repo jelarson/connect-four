@@ -63,12 +63,26 @@ export default function Game(props) {
   if (winner) {
     if (player.count <= tenthScore.highScore) {
       console.log("put me on the leaderboard!");
+      props.history.push("/highscores", {
+        scoreCount: player.count,
+        tenthScore: tenthScore.highScore,
+        onLeaderboard: true,
+      });
     } else {
       console.log("I am not good enough...");
+      props.history.push("/highscores", {
+        scoreCount: player.count,
+        tenthScore: tenthScore.highScore,
+        onLeaderboard: false,
+      });
     }
     // console.log("10th Score", tenthScore.highScore);
     // console.log("turn count", player.count);
-    props.history.push("/highscores");
+    // props.history.push("/highscores", {
+    //   scoreCount: player.count,
+    //   tenthScore: tenthScore.highScore,
+    //   onLeaderboard: true,
+    // });
   }
   // console.log(winner);
 

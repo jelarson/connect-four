@@ -100,6 +100,9 @@ export default function HighScores(props) {
   useEffect(() => {
     actions.setCount(0);
     actions.setPlayer("Player One");
+    console.log("Here are your props", props.location.state);
+    setTurns(props.location.state.scoreCount);
+    setLeaderboard(props.location.state.onLeaderboard);
     axios
       .get(`https://jel-connect-four-scores.herokuapp.com/scores`)
       .then((response) => setScoresArr(response.data))
@@ -181,7 +184,7 @@ export default function HighScores(props) {
       <div css={highScoreMessageCss}>
         {leaderboard
           ? "You made it onto the Leaderboard!"
-          : "You did not make it onto the leaderboard"}
+          : "You did not make it onto the leaderboard."}
         <br />
         You won in {turns} turns.
       </div>
