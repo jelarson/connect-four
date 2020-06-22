@@ -67,6 +67,8 @@ export default function Game(props) {
         scoreCount: player.count,
         tenthScore: tenthScore.highScore,
         onLeaderboard: true,
+        playerOneName: playerOneName,
+        playerTwoName: playerTwoName,
       });
     } else {
       console.log("I am not good enough...");
@@ -74,6 +76,8 @@ export default function Game(props) {
         scoreCount: player.count,
         tenthScore: tenthScore.highScore,
         onLeaderboard: false,
+        playerOneName: playerOneName,
+        playerTwoName: playerTwoName,
       });
     }
     // console.log("10th Score", tenthScore.highScore);

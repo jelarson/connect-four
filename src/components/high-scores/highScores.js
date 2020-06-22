@@ -122,13 +122,19 @@ export default function HighScores(props) {
     { name: "Loading", highScore: "Loading" },
   ]);
   const [leaderboard, setLeaderboard] = useState(true);
+  const [leaderboardOption, setLeaderboardOption] = useState(false);
   const [turns, setTurns] = useState("9");
+  const [theWinner, setTheWinner] = useState("Who Won?");
 
   function handleClick() {
     props.history.push("/");
   }
 
   useEffect(() => {
+    console.log("did I win?", player.turn);
+    player.turn === "Player One"
+      ? setTheWinner(props.location.state.playerTwoName)
+      : setTheWinner(props.location.state.playerOneName);
     actions.setCount(0);
     actions.setPlayer("Player One");
     console.log("Here are your props", props.location.state);
@@ -139,6 +145,12 @@ export default function HighScores(props) {
       .then((response) => setScoresArr(response.data))
       .catch((err) => console.log("error", err));
   }, []);
+
+  useEffect(() => {
+    if (leaderboard) {
+      setLeaderboardOption(true);
+    }
+  }, [leaderboard]);
 
   useEffect(() => {
     let tempArr = [];
@@ -178,6 +190,29 @@ export default function HighScores(props) {
     }
   }
 
+  function handleYes() {
+    setLeaderboardOption(false);
+    console.log(theWinner);
+    axios
+      .post(`https://jel-connect-four-scores.herokuapp.com/score`, {
+        name: theWinner,
+        highScore: String(turns),
+      })
+      .then((response) => {
+        console.log("Score posted", response);
+      })
+      .then(
+        axios
+          .get(`https://jel-connect-four-scores.herokuapp.com/scores`)
+          .then((response) => setScoresArr(response.data))
+          .catch((err) => console.log("error", err))
+      )
+      .catch((err) => console.log(err));
+  }
+  function handleNo() {
+    setLeaderboardOption(false);
+  }
+
   // function postScore() {
   //   if (leaderboard) {
   //     return (
@@ -196,9 +231,6 @@ export default function HighScores(props) {
       <div css={scoreBoxCss}>
         <div css={scoreNamesCss}>
           <ol>
-            {/* <li>{topTenArr[0].name}</li> */}
-            {/* <li>Name: {topTenArr[0].highScore}</li> */}
-            {/* <li>Name: placeholder</li> */}
             {liName(0)}
             {liName(1)}
             {liName(2)}
@@ -231,12 +263,12 @@ export default function HighScores(props) {
           ? "You qualified for the leaderboard!"
           : "You did not make it onto the leaderboard."}
         <br />
-        {leaderboard ? (
+        {leaderboardOption ? (
           <div css={postOptionCss}>
             Would you Like to post your score?
             <div css={optionButtonWrapperCss}>
-              <button>Yes</button>
-              <button>No</button>
+              <button onClick={handleYes}>Yes</button>
+              <button onClick={handleNo}>No</button>
             </div>
           </div>
         ) : null}
