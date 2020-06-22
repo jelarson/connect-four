@@ -28,7 +28,6 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider value={{ player, actions }}>
-      {/* // <UserContext.Provider value={{ player, setPlayer }}> */}
       {children}
     </UserContext.Provider>
   );

@@ -118,9 +118,9 @@ export default function HighScores(props) {
     // setIsLoading(false);
   }, [scoresArr]);
 
-  useEffect(() => {
-    // console.log("top ten", topTenArr);
-  }, [topTenArr]);
+  // useEffect(() => {
+  // console.log("top ten", topTenArr);
+  // }, [topTenArr]);
 
   function liName(num) {
     if (topTenArr.length > 0) {

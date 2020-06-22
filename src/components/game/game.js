@@ -59,17 +59,56 @@ export default function Game(props) {
   const playerOneName = props.location.state.playerOneName;
   const playerTwoName = props.location.state.playerTwoName;
   const { winner, updateGame } = useWinDecider();
+  const [tenthScore, setTenthScore] = useState({});
   if (winner) {
+    if (player.count <= tenthScore.highScore) {
+      console.log("put me on the leaderboard!");
+    } else {
+      console.log("I am not good enough...");
+    }
+    // console.log("10th Score", tenthScore.highScore);
+    // console.log("turn count", player.count);
     props.history.push("/highscores");
   }
   // console.log(winner);
 
   // setPlayer(playerOneName);
   const [playerColor, setPlayerColor] = useState("#d00000");
+  const [scoresArr, setScoresArr] = useState([]);
+  const [topTenArr, setTopTenArr] = useState([]);
 
   useEffect(() => {
     setPlayerColor(player.turn === "Player One" ? "#d00000" : "#faa307");
   }, [player]);
+
+  useEffect(() => {
+    axios
+      .get(`https://jel-connect-four-scores.herokuapp.com/scores`)
+      .then((response) => setScoresArr(response.data))
+      .catch((err) => console.log("error", err));
+  }, []);
+
+  useEffect(() => {
+    let tempArr = [];
+    scoresArr.forEach((obj) => {
+      tempArr.push(obj.highScore);
+    });
+    tempArr.sort((a, b) => a - b);
+    let tempArr2 = [];
+    tempArr.slice(0, 10).forEach((score) => {
+      scoresArr.forEach((obj) => {
+        if (obj.highScore === score) {
+          tempArr2.push(obj);
+        }
+      });
+    });
+    setTopTenArr([...new Set(tempArr2)].slice(0, 10));
+    // setIsLoading(false);
+  }, [scoresArr]);
+
+  useEffect(() => {
+    setTenthScore(topTenArr[9]);
+  }, [topTenArr]);
 
   return (
     <div css={gamePageWrapperCss}>
