@@ -16,19 +16,19 @@ const highScorePageWrapperCss = css`
 `;
 
 const highScoreTitleCss = css`
-  margin-top: 25px;
-  font-size: 4em;
+  margin-top: 10px;
+  font-size: 3.8em;
   color: #faa307;
   font-weight: 900;
   text-align: center;
 `;
 
 const scoreBoxCss = css`
-  width: 75%;
+  width: 72%;
   display: flex;
   background-color: grey;
   flex-direction: row;
-  padding: 15px;
+  padding: 13px;
   align-items: center;
   justify-content: space-between;
   border: 4px solid #faa307;
@@ -38,22 +38,24 @@ const scoreBoxCss = css`
 const scoreNamesCss = css`
   display: flex;
   flex-direction: column;
-  font-size: 22px;
+  font-size: 20px;
 `;
 
 const scoresColumnCss = css`
   display: flex;
   flex-direction: column;
-  font-size: 22px;
+  font-size: 20px;
 `;
 
 const highScoreMessageCss = css`
   display: flex;
-  font-size: 28px;
-  margin-top: 15px;
+  flex-direction: column;
+  font-size: 25px;
+  margin-top: 13px;
   color: #faa307;
   font-weight: 900;
   text-align: center;
+  width: 80vw;
 `;
 
 const playAgainButtonCss = css`
@@ -67,13 +69,42 @@ const playAgainButtonCss = css`
   text-decoration: none;
   outline: none;
   border-style: solid;
+  cursor: pointer;
 
   &:hover {
     background-color: #faa307;
     color: #d00000;
   }
 `;
+const postOptionCss = css`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+`;
+const optionButtonWrapperCss = css`
+  display: flex;
+  flex-direction: row;
+  margin-left: 8px;
 
+  button {
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: #d00000;
+    font-size: 16px;
+    font-weight: 900;
+    color: #faa307;
+    text-decoration: none;
+    outline: none;
+    border-style: solid;
+
+    &:hover {
+      background-color: #faa307;
+      color: #d00000;
+    }
+  }
+`;
 export default function HighScores(props) {
   const { player, actions } = useContext(UserContext);
 
@@ -147,6 +178,18 @@ export default function HighScores(props) {
     }
   }
 
+  // function postScore() {
+  //   if (leaderboard) {
+  //     return (
+  //       <div>
+  //         "Would You Like to post your score?"
+  //         <button> Yes </button>
+  //         <button> No </button>
+  //       </div>
+  //     );
+  //   }
+  // }
+
   return (
     <div css={highScorePageWrapperCss}>
       <div css={highScoreTitleCss}>Top Ten High Scores</div>
@@ -182,11 +225,22 @@ export default function HighScores(props) {
         </div>
       </div>
       <div css={highScoreMessageCss}>
+        You won in {turns} turns.
+        <br />
         {leaderboard
-          ? "You made it onto the Leaderboard!"
+          ? "You qualified for the leaderboard!"
           : "You did not make it onto the leaderboard."}
         <br />
-        You won in {turns} turns.
+        {leaderboard ? (
+          <div css={postOptionCss}>
+            Would you Like to post your score?
+            <div css={optionButtonWrapperCss}>
+              <button>Yes</button>
+              <button>No</button>
+            </div>
+          </div>
+        ) : null}
+        {/* {postScore} */}
       </div>
       <button css={playAgainButtonCss} onClick={handleClick}>
         Play Again?
