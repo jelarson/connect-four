@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { css } from "@emotion/core";
 import axios from "axios";
+
+import { UserContext } from "../context/context";
 
 const highScorePageWrapperCss = css`
   display: flex;
@@ -73,6 +75,8 @@ const playAgainButtonCss = css`
 `;
 
 export default function HighScores(props) {
+  const { player, actions } = useContext(UserContext);
+
   const [scoresArr, setScoresArr] = useState([]);
   const [topTenArr, setTopTenArr] = useState([
     { name: "Loading", highScore: "Loading" },
@@ -94,6 +98,8 @@ export default function HighScores(props) {
   }
 
   useEffect(() => {
+    actions.setCount(0);
+    actions.setPlayer("Player One");
     axios
       .get(`https://jel-connect-four-scores.herokuapp.com/scores`)
       .then((response) => setScoresArr(response.data))

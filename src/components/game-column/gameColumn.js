@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { css } from "@emotion/core";
 
 import { UserContext } from "../context/context";
-import { UserContextTurn } from "../context/turnContext";
+// import { UserContextTurn } from "../context/turnContext";
 
 const columnWrapperCss = css`
   display: flex;
