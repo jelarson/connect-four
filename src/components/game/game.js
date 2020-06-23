@@ -60,6 +60,8 @@ export default function Game(props) {
   const playerTwoName = props.location.state.playerTwoName;
   const { winner, updateGame } = useWinDecider();
   const [tenthScore, setTenthScore] = useState({});
+  const [automatePlayTwo, setAutomatePlayTwo] = useState(false);
+
   if (winner) {
     if (player.count <= tenthScore.highScore) {
       console.log("put me on the leaderboard!");
@@ -78,6 +80,7 @@ export default function Game(props) {
         onLeaderboard: false,
         playerOneName: playerOneName,
         playerTwoName: playerTwoName,
+        hasBeenPosted: false,
       });
     }
     // console.log("10th Score", tenthScore.highScore);
@@ -100,6 +103,8 @@ export default function Game(props) {
   }, [player]);
 
   useEffect(() => {
+    setAutomatePlayTwo(props.location.state.computer);
+    console.log("am I playing the computer?", props.location.state.computer);
     axios
       .get(`https://jel-connect-four-scores.herokuapp.com/scores`)
       .then((response) => setScoresArr(response.data))

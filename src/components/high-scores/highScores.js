@@ -125,21 +125,24 @@ export default function HighScores(props) {
   const [leaderboardOption, setLeaderboardOption] = useState(false);
   const [turns, setTurns] = useState("9");
   const [theWinner, setTheWinner] = useState("Who Won?");
+  const [hasBeenPosted, setHasBeenPosted] = useState(false);
 
   function handleClick() {
     props.history.push("/");
   }
 
   useEffect(() => {
-    console.log("did I win?", player.turn);
+    // console.log("did I win?", player.turn);
     player.turn === "Player One"
       ? setTheWinner(props.location.state.playerTwoName)
       : setTheWinner(props.location.state.playerOneName);
     actions.setCount(0);
     actions.setPlayer("Player One");
-    console.log("Here are your props", props.location.state);
+    // console.log("Here are your props", props.location.state);
     setTurns(props.location.state.scoreCount);
+
     setLeaderboard(props.location.state.onLeaderboard);
+    setHasBeenPosted(props.location.state.hasBeenPosted);
     axios
       .get(`https://jel-connect-four-scores.herokuapp.com/scores`)
       .then((response) => setScoresArr(response.data))
@@ -147,9 +150,14 @@ export default function HighScores(props) {
   }, []);
 
   useEffect(() => {
-    if (leaderboard) {
-      setLeaderboardOption(true);
+    if (theWinner === "The Computer") {
+      console.log("How did you lose to the computer?");
+      setLeaderboard(false);
     }
+  }, [theWinner]);
+
+  useEffect(() => {
+    leaderboard ? setLeaderboardOption(true) : setLeaderboardOption(false);
   }, [leaderboard]);
 
   useEffect(() => {
@@ -204,7 +212,19 @@ export default function HighScores(props) {
       .then(
         axios
           .get(`https://jel-connect-four-scores.herokuapp.com/scores`)
-          .then((response) => setScoresArr(response.data))
+          .then((response) => {
+            setScoresArr(response.data);
+            setHasBeenPosted(true);
+            props.history.push("/highscores", {
+              scoreCount: turns,
+              tenthScore: 10,
+              onLeaderboard: true,
+              playerOneName: theWinner,
+              playerTwoName: theWinner,
+              hasBeenPosted: true,
+            });
+            window.location.reload();
+          })
           .catch((err) => console.log("error", err))
       )
       .catch((err) => console.log(err));
@@ -257,13 +277,13 @@ export default function HighScores(props) {
         </div>
       </div>
       <div css={highScoreMessageCss}>
-        You won in {turns} turns.
+        {theWinner} won in {turns} turns.
         <br />
         {leaderboard
           ? "You qualified for the leaderboard!"
           : "You did not make it onto the leaderboard."}
         <br />
-        {leaderboardOption ? (
+        {leaderboardOption && !hasBeenPosted ? (
           <div css={postOptionCss}>
             Would you Like to post your score?
             <div css={optionButtonWrapperCss}>

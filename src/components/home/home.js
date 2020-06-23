@@ -86,6 +86,7 @@ export default function Home(props) {
   const [playOneName, setPlayOneName] = useState("");
   const [playTwoName, setPlayTwoName] = useState("");
   const [gamepath, setGamePath] = useState("/");
+  const [playingComp, setPlayingComp] = useState(false);
 
   axios
     .post("https://jel-connect-four-scores.herokuapp.com/wakeup", {})
@@ -96,12 +97,14 @@ export default function Home(props) {
     setPlayOneName("");
     setTwoPlayVis("none");
     setOnePlayVis("flex");
+    setPlayingComp(true);
   }
   function handleTwoPlayButton() {
     setPlayOneName("");
     setPlayTwoName("");
     setOnePlayVis("none");
     setTwoPlayVis("flex");
+    setPlayingComp(false);
   }
 
   function linkClick() {
@@ -109,6 +112,7 @@ export default function Home(props) {
       props.history.push("/game", {
         playerOneName: playOneName,
         playerTwoName: playTwoName,
+        computer: playingComp,
       });
     } else {
       alert("Please fill in all required fields");
