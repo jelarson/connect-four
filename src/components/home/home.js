@@ -22,6 +22,19 @@ const homeTitleCss = css`
   span {
     color: #d00000;
   }
+  @media (max-width: 575px) {
+    font-size: 3.2em;
+    margin-top: 15px;
+  }
+  @media (max-width: 475px) {
+    font-size: 2.6em;
+  }
+  @media (max-width: 370px) {
+    font-size: 2em;
+  }
+  @media (max-width: 285px) {
+    font-size: 1.8em;
+  }
 `;
 
 const homeButtonChoiceWrapper = css`
@@ -34,6 +47,13 @@ const homeButtonChoiceWrapper = css`
     text-align: center;
     font-size: 2.4em;
     color: #faa307;
+
+    @media (max-width: 475px) {
+      font-size: 2em;
+    }
+    @media (max-width: 370px) {
+      font-size: 1.5em;
+    }
   }
   .home-button-wrapper {
     width: 100%;
@@ -59,6 +79,13 @@ const homeButton = css`
     background-color: #faa307;
     color: #d00000;
   }
+
+  @media (max-width: 475px) {
+    font-size: 18px;
+  }
+  @media (max-width: 340px) {
+    font-size: 13px;
+  }
 `;
 
 const twoPlayerGame = css`
@@ -78,6 +105,18 @@ const inputBox = css`
   outline: none;
   margin-top: 25px;
   border: none;
+  @media (max-width: 500px) {
+    font-size: 16px;
+  }
+  @media (max-width: 350px) {
+    font-size: 14px;
+  }
+  @media (max-width: 310px) {
+    font-size: 12px;
+  }
+  @media (max-width: 265px) {
+    font-size: 10px;
+  }
 `;
 
 export default function Home(props) {

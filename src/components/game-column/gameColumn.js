@@ -151,7 +151,7 @@ export default function GameColumn(props) {
     );
     console.log(player.turn);
     setClickCount(clickCount + 1);
-
+    // console.log("I have been clicked!", clickCount);
     props.updateFunc(
       props.column - 1,
       clickCount,
@@ -160,6 +160,10 @@ export default function GameColumn(props) {
       props.playerTwoName
     );
   }
+
+  useEffect(() => {
+    console.log("i have been clicked!", clickCount);
+  }, [clickCount]);
 
   return (
     <div css={columnWrapperCss} onClick={clickHandler}>
