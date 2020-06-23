@@ -109,6 +109,16 @@ export default function GameColumn(props) {
     );
   }, [player]);
 
+  useEffect(() => {
+    if (player.turn === "Player Two" && props.column === props.compChoice) {
+      // setTimeout(() => {
+      // clickHandler();
+      // }, 800);
+      setTimeout(clickHandler, 800);
+      console.log("My column was chosen!", props.column);
+    }
+  });
+
   function clickHandler() {
     let time = 40;
     for (let i = 0; i < rowsRemaining - 1; i++) {

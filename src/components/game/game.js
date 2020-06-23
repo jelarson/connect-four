@@ -61,6 +61,9 @@ export default function Game(props) {
   const { winner, updateGame } = useWinDecider();
   const [tenthScore, setTenthScore] = useState({});
   const [automatePlayTwo, setAutomatePlayTwo] = useState(false);
+  const [compChoice, setCompChoice] = useState(
+    Math.floor(Math.random() * Math.floor(7)) + 1
+  );
 
   if (winner) {
     if (player.count <= tenthScore.highScore) {
@@ -112,6 +115,19 @@ export default function Game(props) {
   }, []);
 
   useEffect(() => {
+    if (automatePlayTwo && player.turn === "Player Two") {
+      setCompChoice(Math.floor(Math.random() * Math.floor(7)) + 1);
+    }
+  }, [player.turn]);
+
+  useEffect(() => {
+    console.log(compChoice);
+  }, [compChoice]);
+  // useEffect(() => {
+  //   Math.floor(Math.random() * Math.floor(7))
+  // }, [automatePlayTwo])
+
+  useEffect(() => {
     let tempArr = [];
     scoresArr.forEach((obj) => {
       tempArr.push(obj.highScore);
@@ -144,6 +160,7 @@ export default function Game(props) {
           playerTwoName={playerTwoName}
           column={1}
           updateFunc={updateGame}
+          compChoice={compChoice}
         />
         <GameColumn
           className='column c-two'
@@ -152,6 +169,7 @@ export default function Game(props) {
           playerTwoName={playerTwoName}
           column={2}
           updateFunc={updateGame}
+          compChoice={compChoice}
         />
         <GameColumn
           className='column c-three'
@@ -160,6 +178,7 @@ export default function Game(props) {
           playerTwoName={playerTwoName}
           column={3}
           updateFunc={updateGame}
+          compChoice={compChoice}
         />
         <GameColumn
           className='column c-four'
@@ -168,6 +187,7 @@ export default function Game(props) {
           playerTwoName={playerTwoName}
           column={4}
           updateFunc={updateGame}
+          compChoice={compChoice}
         />
         <GameColumn
           className='column c-five'
@@ -176,6 +196,7 @@ export default function Game(props) {
           playerTwoName={playerTwoName}
           column={5}
           updateFunc={updateGame}
+          compChoice={compChoice}
         />
         <GameColumn
           className='column c-six'
@@ -184,6 +205,7 @@ export default function Game(props) {
           playerTwoName={playerTwoName}
           column={6}
           updateFunc={updateGame}
+          compChoice={compChoice}
         />
         <GameColumn
           className='column c-seven'
@@ -192,6 +214,7 @@ export default function Game(props) {
           playerTwoName={playerTwoName}
           column={7}
           updateFunc={updateGame}
+          compChoice={compChoice}
         />
       </div>
       <div className='turn-name-tracker'>
