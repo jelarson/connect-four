@@ -116,7 +116,9 @@ export default function Game(props) {
 
   useEffect(() => {
     if (automatePlayTwo && player.turn === "Player Two") {
-      setCompChoice(Math.floor(Math.random() * Math.floor(7)) + 1);
+      setTimeout(() => {
+        setCompChoice(Math.floor(Math.random() * Math.floor(7)) + 1);
+      }, 1000);
     }
   }, [player.turn]);
 

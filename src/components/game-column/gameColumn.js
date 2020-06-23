@@ -111,13 +111,14 @@ export default function GameColumn(props) {
 
   useEffect(() => {
     if (player.turn === "Player Two" && props.column === props.compChoice) {
-      // setTimeout(() => {
+      setTimeout(() => {
+        clickHandler();
+      }, 500);
+      // setTimeout(800);
       // clickHandler();
-      // }, 800);
-      setTimeout(clickHandler, 800);
-      console.log("My column was chosen!", props.column);
+      // console.log("My column was chosen!", props.column);
     }
-  });
+  }, [player.turn]);
 
   function clickHandler() {
     let time = 40;
