@@ -3,7 +3,7 @@ import axios from "axios";
 import { css } from "@emotion/core";
 
 import { UserContext } from "../context/context";
-import { UserContextTurn } from "../context/turnContext";
+// import { UserContextTurn } from "../context/turnContext";
 import useWinDecider from "../winDecider/winDecider";
 
 import GameColumn from "../game-column/gameColumn";
@@ -163,6 +163,7 @@ export default function Game(props) {
           column={1}
           updateFunc={updateGame}
           compChoice={compChoice}
+          automated={automatePlayTwo}
         />
         <GameColumn
           className='column c-two'
@@ -172,6 +173,7 @@ export default function Game(props) {
           column={2}
           updateFunc={updateGame}
           compChoice={compChoice}
+          automated={automatePlayTwo}
         />
         <GameColumn
           className='column c-three'
@@ -181,6 +183,7 @@ export default function Game(props) {
           column={3}
           updateFunc={updateGame}
           compChoice={compChoice}
+          automated={automatePlayTwo}
         />
         <GameColumn
           className='column c-four'
@@ -190,6 +193,7 @@ export default function Game(props) {
           column={4}
           updateFunc={updateGame}
           compChoice={compChoice}
+          automated={automatePlayTwo}
         />
         <GameColumn
           className='column c-five'
@@ -199,6 +203,7 @@ export default function Game(props) {
           column={5}
           updateFunc={updateGame}
           compChoice={compChoice}
+          automated={automatePlayTwo}
         />
         <GameColumn
           className='column c-six'
@@ -208,6 +213,7 @@ export default function Game(props) {
           column={6}
           updateFunc={updateGame}
           compChoice={compChoice}
+          automated={automatePlayTwo}
         />
         <GameColumn
           className='column c-seven'
@@ -217,6 +223,7 @@ export default function Game(props) {
           column={7}
           updateFunc={updateGame}
           compChoice={compChoice}
+          automated={automatePlayTwo}
         />
       </div>
       <div className='turn-name-tracker'>

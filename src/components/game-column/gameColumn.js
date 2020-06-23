@@ -110,7 +110,11 @@ export default function GameColumn(props) {
   }, [player]);
 
   useEffect(() => {
-    if (player.turn === "Player Two" && props.column === props.compChoice) {
+    if (
+      player.turn === "Player Two" &&
+      props.column === props.compChoice &&
+      props.automated === true
+    ) {
       setTimeout(() => {
         clickHandler();
       }, 500);
