@@ -11,12 +11,29 @@ const columnWrapperCss = css`
 
   .squareOne {
     width: 80px;
-    heigh: 80px;
+    height: 80px;
     padding: 2px;
     background-color: #5465ff;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 610px) {
+      width: 60px;
+      height: 60px;
+    }
+    @media (max-width: 475px) {
+      width: 45px;
+      height: 45px;
+    }
+    @media (max-width: 370px) {
+      width: 34px;
+      height: 34px;
+    }
+    @media (max-width: 280px) {
+      width: 26px;
+      height: 26px;
+    }
 
     .circleOneRed {
       width: 65px;
@@ -24,6 +41,27 @@ const columnWrapperCss = css`
       // border: 2px white solid;
       border-radius: 33px;
       background-color: #5465ff;
+
+      @media (max-width: 610px) {
+        width: 48px;
+        height: 48px;
+        border-radius: 24px;
+      }
+      @media (max-width: 475px) {
+        width: 36px;
+        height: 36px;
+        border-radius: 18px;
+      }
+      @media (max-width: 370px) {
+        width: 27px;
+        height: 27px;
+        border-radius: 14px;
+      }
+      @media (max-width: 280px) {
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+      }
     }
     .circleOneYellow {
       width: 65px;
@@ -31,6 +69,27 @@ const columnWrapperCss = css`
       // border: 2px white solid;
       border-radius: 33px;
       background-color: #5465ff;
+
+      @media (max-width: 610px) {
+        width: 48px;
+        height: 48px;
+        border-radius: 24px;
+      }
+      @media (max-width: 475px) {
+        width: 36px;
+        height: 36px;
+        border-radius: 18px;
+      }
+      @media (max-width: 370px) {
+        width: 27px;
+        height: 27px;
+        border-radius: 14px;
+      }
+      @media (max-width: 280px) {
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+      }
     }
   }
 
@@ -51,12 +110,50 @@ const columnWrapperCss = css`
     justify-content: center;
     align-items: center;
 
+    @media (max-width: 610px) {
+      width: 60px;
+      height: 60px;
+    }
+    @media (max-width: 475px) {
+      width: 45px;
+      height: 45px;
+    }
+    @media (max-width: 370px) {
+      width: 34px;
+      height: 34px;
+    }
+    @media (max-width: 280px) {
+      width: 26px;
+      height: 26px;
+    }
+
     .circle {
       width: 65px;
       height: 65px;
       border: 2px white solid;
       border-radius: 33px;
       background-color: #5465ff;
+
+      @media (max-width: 610px) {
+        width: 48px;
+        height: 48px;
+        border-radius: 24px;
+      }
+      @media (max-width: 475px) {
+        width: 36px;
+        height: 36px;
+        border-radius: 18px;
+      }
+      @media (max-width: 370px) {
+        width: 27px;
+        height: 27px;
+        border-radius: 14px;
+      }
+      @media (max-width: 280px) {
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+      }
     }
     .circleYellowActive {
       width: 65px;
@@ -64,6 +161,27 @@ const columnWrapperCss = css`
       border: 2px white solid;
       border-radius: 33px;
       background-color: #faa307;
+
+      @media (max-width: 610px) {
+        width: 48px;
+        height: 48px;
+        border-radius: 24px;
+      }
+      @media (max-width: 475px) {
+        width: 36px;
+        height: 36px;
+        border-radius: 18px;
+      }
+      @media (max-width: 370px) {
+        width: 27px;
+        height: 27px;
+        border-radius: 14px;
+      }
+      @media (max-width: 280px) {
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+      }
     }
     .circleRedActive {
       width: 65px;
@@ -71,6 +189,27 @@ const columnWrapperCss = css`
       border: 2px white solid;
       border-radius: 33px;
       background-color: #d00000;
+
+      @media (max-width: 610px) {
+        width: 48px;
+        height: 48px;
+        border-radius: 24px;
+      }
+      @media (max-width: 475px) {
+        width: 36px;
+        height: 36px;
+        border-radius: 18px;
+      }
+      @media (max-width: 370px) {
+        width: 27px;
+        height: 27px;
+        border-radius: 14px;
+      }
+      @media (max-width: 280px) {
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+      }
     }
   }
 `;
