@@ -106,6 +106,7 @@ export default function Game(props) {
   // Adjust the number of columns remaing to the new length of the availableColumns Array minus one
   useEffect(() => {
     setNumOfColumnsRemaining(availableColumns.length - 1)
+    console.log('here are the remaing columns', availableColumns)
   }, [availableColumns])
 
   const [playerColor, setPlayerColor] = useState('#d00000')
@@ -137,7 +138,7 @@ export default function Game(props) {
   }, [player.turn])
 
   useEffect(() => {
-    console.log(compChoice)
+    console.log('I have chosen #', compChoice)
   }, [compChoice])
 
   // Sort the scores array by highscore and return a list of the sorted top ten
