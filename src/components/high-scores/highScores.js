@@ -22,8 +22,17 @@ const highScoreTitleCss = css`
   font-weight: 900;
   text-align: center;
 
-  @media (max-width: 610px) {
+  @media (max-width: 600px) {
     font-size: 3.2em;
+  }
+  @media (max-width: 480px) {
+    font-size: 2.5em;
+  }
+  @media (max-width: 365px) {
+    font-size: 2em;
+  }
+  @media (max-width: 300px) {
+    font-size: 1.7em;
   }
 `;
 
@@ -43,12 +52,20 @@ const scoreNamesCss = css`
   display: flex;
   flex-direction: column;
   font-size: 20px;
+
+  @media (max-width: 300px) {
+    font-size: 16px;
+  }
 `;
 
 const scoresColumnCss = css`
   display: flex;
   flex-direction: column;
   font-size: 20px;
+
+  @media (max-width: 300px) {
+    font-size: 16px;
+  }
 `;
 
 const highScoreMessageCss = css`
@@ -60,6 +77,12 @@ const highScoreMessageCss = css`
   font-weight: 900;
   text-align: center;
   width: 80vw;
+  @media (max-width: 600px) {
+    font-size: 18px;
+  }
+  @media (max-width: 450px) {
+    font-size: 13px;
+  }
 `;
 
 const playAgainButtonCss = css`
@@ -78,6 +101,14 @@ const playAgainButtonCss = css`
   &:hover {
     background-color: #faa307;
     color: #d00000;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 18px;
+  }
+  @media (max-width: 450px) {
+    font-size: 13px;
+    margin-top: 15px;
   }
 `;
 const postOptionCss = css`
