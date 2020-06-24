@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { css } from '@emotion/core'
 
+import HomeColumns from '../home-columns/homeColumns'
+
 const homeWrapperCss = css`
   width: 100vw;
   height: 100vh;
@@ -118,6 +120,10 @@ const inputBox = css`
     font-size: 10px;
   }
 `
+const gridGameWrapperCss = css`
+  display: flex;
+  flex-direction: row;
+`
 
 export default function Home(props) {
   const [onePlayVis, setOnePlayVis] = useState('none')
@@ -164,6 +170,34 @@ export default function Home(props) {
       <div css={homeTitleCss}>
         Can you <br />
         <span>CONNECT FOUR</span>?
+      </div>
+      <div css={gridGameWrapperCss}>
+        <HomeColumns yellowArr={[0, 1, 2, 3, 4]} redArr={[]} />
+        {/* <HomeColumns yellowArr={[]} redArr={[]} /> */}
+        <HomeColumns yellowArr={[]} redArr={[0, 1, 2, 3, 4]} />
+        <HomeColumns yellowArr={[1, 3, 4]} redArr={[0, 2]} />
+        <HomeColumns yellowArr={[1, 2, 3, 4]} redArr={[0]} />
+        <HomeColumns yellowArr={[0, 1, 2, 3, 4]} redArr={[]} />
+        {/* <HomeColumns yellowArr={[]} redArr={[]} /> */}
+        <HomeColumns yellowArr={[]} redArr={[0, 1, 2, 3, 4]} />
+        <HomeColumns yellowArr={[1, 2, 3]} redArr={[0, 4]} />
+        <HomeColumns yellowArr={[]} redArr={[0, 1, 2, 3, 4]} />
+        <HomeColumns yellowArr={[0, 1, 2, 3, 4]} redArr={[]} />
+        {/* <HomeColumns yellowArr={[]} redArr={[]} /> */}
+        <HomeColumns yellowArr={[]} redArr={[0, 1, 2, 3, 4]} />
+        <HomeColumns yellowArr={[0, 1, 2, 3]} redArr={[4]} />
+        <HomeColumns yellowArr={[]} redArr={[0, 1, 2, 3, 4]} />
+        <HomeColumns yellowArr={[0, 1, 2, 3, 4]} redArr={[]} />
+        {/* <HomeColumns yellowArr={[]} redArr={[]} /> */}
+        <HomeColumns yellowArr={[]} redArr={[0, 1, 2, 3, 4]} />
+        <HomeColumns yellowArr={[1, 3, 4]} redArr={[0, 2]} />
+        <HomeColumns yellowArr={[0, 2]} redArr={[1, 3, 4]} />
+        <HomeColumns yellowArr={[0, 1, 2, 3, 4]} redArr={[]} />
+        {/* <HomeColumns yellowArr={[]} redArr={[]} /> */}
+        <HomeColumns yellowArr={[0, 2, 3, 4]} redArr={[1]} />
+        <HomeColumns yellowArr={[1, 2]} redArr={[0, 3, 4]} />
+        <HomeColumns yellowArr={[0, 3, 4]} redArr={[1, 2]} />
+        <HomeColumns yellowArr={[0, 1, 2, 3, 4]} redArr={[]} />
       </div>
       <div css={homeButtonChoiceWrapper}>
         <div className="home-button-message">Who would you like to play against?</div>
