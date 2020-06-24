@@ -24,6 +24,13 @@ const gamePageWrapperCss = css`
     color: #faa307;
     font-weight: 900;
     text-align: center;
+
+    @media (max-width: 610px) {
+      font-size: 3.6em;
+    }
+    @media (max-width: 260px) {
+      font-size: 3em;
+    }
   }
 
   .turn-name-tracker {
@@ -33,6 +40,10 @@ const gamePageWrapperCss = css`
     font-size: 1.2em;
     font-weight: 900;
     color: #faa307;
+
+    @media (max-width: 610px) {
+      position: initial;
+    }
   }
 
   .turn-count-tracker {
@@ -42,6 +53,10 @@ const gamePageWrapperCss = css`
     font-size: 1.2em;
     font-weight: 900;
     color: #faa307;
+
+    @media (max-width: 610px) {
+      position: initial;
+    }
   }
 `;
 

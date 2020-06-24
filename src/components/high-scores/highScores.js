@@ -21,6 +21,10 @@ const highScoreTitleCss = css`
   color: #faa307;
   font-weight: 900;
   text-align: center;
+
+  @media (max-width: 610px) {
+    font-size: 3.2em;
+  }
 `;
 
 const scoreBoxCss = css`
