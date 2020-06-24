@@ -67,9 +67,6 @@ const gameColumnWrapperCss = css`
 `
 
 export default function Game(props) {
-  // console.log(props.location.state);
-  // const { turnCount } = useContext(UserContextTurn);
-  // const { setPlayer } = useContext(UserContext);
   const { player } = useContext(UserContext)
   const playerOneName = props.location.state.playerOneName
   const playerTwoName = props.location.state.playerTwoName
@@ -82,6 +79,7 @@ export default function Game(props) {
     availableColumns[Math.floor(Math.random() * Math.floor(numOfColumnsRemaining))]
   )
 
+  // if boolean for winner is true, redirect to highscores page
   if (winner) {
     if (player.count <= tenthScore.highScore) {
       console.log('put me on the leaderboard!')
@@ -105,27 +103,21 @@ export default function Game(props) {
     }
   }
 
+  // Adjust the number of columns remaing to the new length of the availableColumns Array minus one
   useEffect(() => {
     setNumOfColumnsRemaining(availableColumns.length - 1)
   }, [availableColumns])
-  // console.log("10th Score", tenthScore.highScore);
-  // console.log("turn count", player.count);
-  // props.history.push("/highscores", {
-  //   scoreCount: player.count,
-  //   tenthScore: tenthScore.highScore,
-  //   onLeaderboard: true,
-  // });
-  // console.log(winner);
 
-  // setPlayer(playerOneName);
   const [playerColor, setPlayerColor] = useState('#d00000')
   const [scoresArr, setScoresArr] = useState([])
   const [topTenArr, setTopTenArr] = useState([])
 
+  // Player one is assigned red, player two to yellow - color switch on turn switch
   useEffect(() => {
     setPlayerColor(player.turn === 'Player One' ? '#d00000' : '#faa307')
   }, [player])
 
+  // Are you playing against the computer? Set scores array to the current data from the high scores page so it can be compared to ending turn score later
   useEffect(() => {
     setAutomatePlayTwo(props.location.state.computer)
     console.log('am I playing the computer?', props.location.state.computer)
@@ -135,6 +127,7 @@ export default function Game(props) {
       .catch((err) => console.log('error', err))
   }, [])
 
+  // if you are playing the computer and it is the computer's turn, choose a random number as the index to see which column it chooses
   useEffect(() => {
     if (automatePlayTwo && player.turn === 'Player Two') {
       setTimeout(() => {
@@ -146,10 +139,8 @@ export default function Game(props) {
   useEffect(() => {
     console.log(compChoice)
   }, [compChoice])
-  // useEffect(() => {
-  //   Math.floor(Math.random() * Math.floor(7))
-  // }, [automatePlayTwo])
 
+  // Sort the scores array by highscore and return a list of the sorted top ten
   useEffect(() => {
     const tempArr = []
     scoresArr.forEach((obj) => {
@@ -165,9 +156,9 @@ export default function Game(props) {
       })
     })
     setTopTenArr([...new Set(tempArr2)].slice(0, 10))
-    // setIsLoading(false);
   }, [scoresArr])
 
+  // grab tenth score from top ten array to be compared against the current game score
   useEffect(() => {
     setTenthScore(topTenArr[9])
   }, [topTenArr])

@@ -124,9 +124,9 @@ export default function Home(props) {
   const [twoPlayVis, setTwoPlayVis] = useState('none')
   const [playOneName, setPlayOneName] = useState('')
   const [playTwoName, setPlayTwoName] = useState('')
-  // const [gamepath, setGamePath] = useState('/')
   const [playingComp, setPlayingComp] = useState(false)
 
+  // Wake up backend server so it is not in its loading state as long later
   axios
     .post('https://jel-connect-four-scores.herokuapp.com/wakeup', {})
     .then((response) => console.log('Are you awake yet?      ', response.data))
@@ -146,6 +146,7 @@ export default function Home(props) {
     setPlayingComp(false)
   }
 
+  // If names are not blank, push with the name props and the boolean value if you are playing the computer
   function linkClick() {
     if (playOneName !== '' && playTwoName !== '') {
       props.history.push('/game', {

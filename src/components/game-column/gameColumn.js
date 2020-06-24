@@ -215,10 +215,7 @@ const columnWrapperCss = css`
 `
 
 export default function GameColumn(props) {
-  // const { setPlayer } = useContext(UserContext);
   const { player, actions } = useContext(UserContext)
-  // const { turnCount } = useContext(UserContextTurn);
-  // const { setTurnCount } = useContext(UserContextTurn);
   const [clickCount, setClickCount] = useState(0)
   const [rowsRemaining, setRowsRemaining] = useState(6)
   const [circleOne, setCircleOne] = useState('circleOneRed')
@@ -238,14 +235,12 @@ export default function GameColumn(props) {
     setActiveClass6,
   ]
 
-  // useEffect(() => {
-  //   setTurn(props.player)
-  // }, [])
-
+  // player one is red, player two is yellow. Switch color on turn switch
   useEffect(() => {
     setCircleOne(player.turn === 'Player One' ? 'circleOneRed' : 'circleOneYellow')
   }, [player])
 
+  // if the clickcount gets up to 6, remove this column index from the array of available columns kept in game comp
   useEffect(() => {
     if (clickCount === 6) {
       props.setRemaining([
@@ -256,17 +251,16 @@ export default function GameColumn(props) {
     }
   }, [clickCount])
 
+  // if you are playing the computer, it is their turn, and their chosen column matches this column, run the clickHanldler function after a short pause
   useEffect(() => {
     if (player.turn === 'Player Two' && props.column === props.compChoice && props.automated === true) {
       setTimeout(() => {
         clickHandler()
       }, 500)
-      // setTimeout(800);
-      // clickHandler();
-      // console.log("My column was chosen!", props.column);
     }
   }, [player.turn])
 
+  // function that controls 'dropping' the game piece in the column. Briefly 'lights up' all available spaces above where tile will be dropped. Adds to the click count for the column, runs function from winDecider to check for winner, and switches to other player's turn.
   function clickHandler() {
     const time = 40
     for (let i = 0; i < rowsRemaining - 1; i++) {
@@ -284,7 +278,6 @@ export default function GameColumn(props) {
     actions.setPlayer(player.turn === 'Player One' ? 'Player Two' : 'Player One')
     console.log(player.turn)
     setClickCount(clickCount + 1)
-    // console.log("I have been clicked!", clickCount);
     props.updateFunc(
       props.column - 1,
       clickCount,
