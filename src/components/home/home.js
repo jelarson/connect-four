@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { css } from "@emotion/core";
+import React, { useState } from 'react'
+import axios from 'axios'
+import { css } from '@emotion/core'
 
 const homeWrapperCss = css`
   width: 100vw;
   height: 100vh;
-  margin: -8px;
+  // margin: -8px;
   display: flex;
   flex-direction: column;
   /* // justify-content: center; */
   align-items: center;
   background-color: #5465ff;
-`;
+`
 
 const homeTitleCss = css`
   margin-top: 25px;
@@ -35,7 +35,7 @@ const homeTitleCss = css`
   @media (max-width: 285px) {
     font-size: 1.8em;
   }
-`;
+`
 
 const homeButtonChoiceWrapper = css`
   margin-top: 40px;
@@ -61,7 +61,7 @@ const homeButtonChoiceWrapper = css`
     flex-direction: row;
     justify-content: space-around;
   }
-`;
+`
 
 const homeButton = css`
   margin-top: 34px;
@@ -86,19 +86,19 @@ const homeButton = css`
   @media (max-width: 340px) {
     font-size: 13px;
   }
-`;
+`
 
 const twoPlayerGame = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
+`
 const twoPlayerGameInputWrapper = css`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-`;
+`
 const inputBox = css`
   font-size: 22px;
   border-radius: 15px;
@@ -117,44 +117,44 @@ const inputBox = css`
   @media (max-width: 265px) {
     font-size: 10px;
   }
-`;
+`
 
 export default function Home(props) {
-  const [onePlayVis, setOnePlayVis] = useState("none");
-  const [twoPlayVis, setTwoPlayVis] = useState("none");
-  const [playOneName, setPlayOneName] = useState("");
-  const [playTwoName, setPlayTwoName] = useState("");
-  const [gamepath, setGamePath] = useState("/");
-  const [playingComp, setPlayingComp] = useState(false);
+  const [onePlayVis, setOnePlayVis] = useState('none')
+  const [twoPlayVis, setTwoPlayVis] = useState('none')
+  const [playOneName, setPlayOneName] = useState('')
+  const [playTwoName, setPlayTwoName] = useState('')
+  const [gamepath, setGamePath] = useState('/')
+  const [playingComp, setPlayingComp] = useState(false)
 
   axios
-    .post("https://jel-connect-four-scores.herokuapp.com/wakeup", {})
-    .then((response) => console.log("Are you awake yet?      ", response.data));
+    .post('https://jel-connect-four-scores.herokuapp.com/wakeup', {})
+    .then((response) => console.log('Are you awake yet?      ', response.data))
 
   function handleOnePlayButton() {
-    setPlayTwoName("The Computer");
-    setPlayOneName("");
-    setTwoPlayVis("none");
-    setOnePlayVis("flex");
-    setPlayingComp(true);
+    setPlayTwoName('The Computer')
+    setPlayOneName('')
+    setTwoPlayVis('none')
+    setOnePlayVis('flex')
+    setPlayingComp(true)
   }
   function handleTwoPlayButton() {
-    setPlayOneName("");
-    setPlayTwoName("");
-    setOnePlayVis("none");
-    setTwoPlayVis("flex");
-    setPlayingComp(false);
+    setPlayOneName('')
+    setPlayTwoName('')
+    setOnePlayVis('none')
+    setTwoPlayVis('flex')
+    setPlayingComp(false)
   }
 
   function linkClick() {
-    if (playOneName !== "" && playTwoName !== "") {
-      props.history.push("/game", {
+    if (playOneName !== '' && playTwoName !== '') {
+      props.history.push('/game', {
         playerOneName: playOneName,
         playerTwoName: playTwoName,
         computer: playingComp,
-      });
+      })
     } else {
-      alert("Please fill in all required fields");
+      alert('Please fill in all required fields')
     }
   }
 
@@ -165,10 +165,8 @@ export default function Home(props) {
         <span>CONNECT FOUR</span>?
       </div>
       <div css={homeButtonChoiceWrapper}>
-        <div className='home-button-message'>
-          Who would you like to play against?
-        </div>
-        <div className='home-button-wrapper'>
+        <div className="home-button-message">Who would you like to play against?</div>
+        <div className="home-button-wrapper">
           <button css={homeButton} onClick={handleTwoPlayButton}>
             Another Player
           </button>
@@ -184,9 +182,9 @@ export default function Home(props) {
                 placeholder=" Player One's Name"
                 value={playOneName}
                 onChange={({ target }) => {
-                  setPlayOneName(target.value);
+                  setPlayOneName(target.value)
                 }}
-              ></input>
+              />
             </form>
             <form>
               <input
@@ -194,16 +192,12 @@ export default function Home(props) {
                 placeholder=" Player Two's Name"
                 value={playTwoName}
                 onChange={({ target }) => {
-                  setPlayTwoName(target.value);
+                  setPlayTwoName(target.value)
                 }}
-              ></input>
+              />
             </form>
           </div>
-          <button
-            onClick={linkClick}
-            css={homeButton}
-            style={{ borderStyle: "none" }}
-          >
+          <button onClick={linkClick} css={homeButton} style={{ borderStyle: 'none' }}>
             Start Game
           </button>
         </div>
@@ -211,22 +205,18 @@ export default function Home(props) {
           <form>
             <input
               css={inputBox}
-              placeholder=' Your Name'
+              placeholder=" Your Name"
               value={playOneName}
               onChange={({ target }) => {
-                setPlayOneName(target.value);
+                setPlayOneName(target.value)
               }}
-            ></input>
+            />
           </form>
-          <button
-            onClick={linkClick}
-            css={homeButton}
-            style={{ borderStyle: "none" }}
-          >
+          <button onClick={linkClick} css={homeButton} style={{ borderStyle: 'none' }}>
             Start Game
           </button>
         </div>
       </div>
     </div>
-  );
+  )
 }

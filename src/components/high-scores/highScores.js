@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
-import { css } from "@emotion/core";
-import axios from "axios";
+import React, { useState, useEffect, useContext } from 'react'
+import { css } from '@emotion/core'
+import axios from 'axios'
 
-import { UserContext } from "../context/context";
+import { UserContext } from '../context/context'
 
 const highScorePageWrapperCss = css`
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  margin: -8px;
+  // margin: -8px;
   background-color: #5465ff;
   align-items: center;
   position: relative;
-`;
+`
 
 const highScoreTitleCss = css`
   margin-top: 10px;
@@ -34,7 +34,7 @@ const highScoreTitleCss = css`
   @media (max-width: 300px) {
     font-size: 1.7em;
   }
-`;
+`
 
 const scoreBoxCss = css`
   width: 72%;
@@ -46,7 +46,7 @@ const scoreBoxCss = css`
   justify-content: space-between;
   border: 4px solid #faa307;
   border-radius: 15px;
-`;
+`
 
 const scoreNamesCss = css`
   display: flex;
@@ -56,7 +56,7 @@ const scoreNamesCss = css`
   @media (max-width: 300px) {
     font-size: 16px;
   }
-`;
+`
 
 const scoresColumnCss = css`
   display: flex;
@@ -66,7 +66,7 @@ const scoresColumnCss = css`
   @media (max-width: 300px) {
     font-size: 16px;
   }
-`;
+`
 
 const highScoreMessageCss = css`
   display: flex;
@@ -83,7 +83,7 @@ const highScoreMessageCss = css`
   @media (max-width: 450px) {
     font-size: 13px;
   }
-`;
+`
 
 const playAgainButtonCss = css`
   margin-top: 34px;
@@ -110,14 +110,14 @@ const playAgainButtonCss = css`
     font-size: 13px;
     margin-top: 15px;
   }
-`;
+`
 const postOptionCss = css`
   display: flex;
   flex-direction: row;
   width: 100%;
   align-items: center;
   justify-content: center;
-`;
+`
 const optionButtonWrapperCss = css`
   display: flex;
   flex-direction: row;
@@ -139,79 +139,79 @@ const optionButtonWrapperCss = css`
       color: #d00000;
     }
   }
-`;
+`
 export default function HighScores(props) {
-  const { player, actions } = useContext(UserContext);
+  const { player, actions } = useContext(UserContext)
 
-  const [scoresArr, setScoresArr] = useState([]);
+  const [scoresArr, setScoresArr] = useState([])
   const [topTenArr, setTopTenArr] = useState([
-    { name: "Loading", highScore: "Loading" },
-    { name: "Loading", highScore: "Loading" },
-    { name: "Loading", highScore: "Loading" },
-    { name: "Loading", highScore: "Loading" },
-    { name: "Loading", highScore: "Loading" },
-    { name: "Loading", highScore: "Loading" },
-    { name: "Loading", highScore: "Loading" },
-    { name: "Loading", highScore: "Loading" },
-    { name: "Loading", highScore: "Loading" },
-    { name: "Loading", highScore: "Loading" },
-  ]);
-  const [leaderboard, setLeaderboard] = useState(true);
-  const [leaderboardOption, setLeaderboardOption] = useState(false);
-  const [turns, setTurns] = useState("9");
-  const [theWinner, setTheWinner] = useState("Who Won?");
-  const [hasBeenPosted, setHasBeenPosted] = useState(false);
+    { name: 'Loading', highScore: 'Loading' },
+    { name: 'Loading', highScore: 'Loading' },
+    { name: 'Loading', highScore: 'Loading' },
+    { name: 'Loading', highScore: 'Loading' },
+    { name: 'Loading', highScore: 'Loading' },
+    { name: 'Loading', highScore: 'Loading' },
+    { name: 'Loading', highScore: 'Loading' },
+    { name: 'Loading', highScore: 'Loading' },
+    { name: 'Loading', highScore: 'Loading' },
+    { name: 'Loading', highScore: 'Loading' },
+  ])
+  const [leaderboard, setLeaderboard] = useState(true)
+  const [leaderboardOption, setLeaderboardOption] = useState(false)
+  const [turns, setTurns] = useState('9')
+  const [theWinner, setTheWinner] = useState('Who Won?')
+  const [hasBeenPosted, setHasBeenPosted] = useState(false)
 
   function handleClick() {
-    props.history.push("/");
+    props.history.push('/')
   }
 
   useEffect(() => {
     // console.log("did I win?", player.turn);
-    player.turn === "Player One"
+    player.turn === 'Player One'
       ? setTheWinner(props.location.state.playerTwoName)
-      : setTheWinner(props.location.state.playerOneName);
-    actions.setCount(0);
-    actions.setPlayer("Player One");
+      : setTheWinner(props.location.state.playerOneName)
+    actions.setCount(0)
+    actions.setPlayer('Player One')
     // console.log("Here are your props", props.location.state);
-    setTurns(props.location.state.scoreCount);
+    setTurns(props.location.state.scoreCount)
 
-    setLeaderboard(props.location.state.onLeaderboard);
-    setHasBeenPosted(props.location.state.hasBeenPosted);
+    setLeaderboard(props.location.state.onLeaderboard)
+    setHasBeenPosted(props.location.state.hasBeenPosted)
     axios
       .get(`https://jel-connect-four-scores.herokuapp.com/scores`)
       .then((response) => setScoresArr(response.data))
-      .catch((err) => console.log("error", err));
-  }, []);
+      .catch((err) => console.log('error', err))
+  }, [])
 
   useEffect(() => {
-    if (theWinner === "The Computer") {
-      console.log("How did you lose to the computer?");
-      setLeaderboard(false);
+    if (theWinner === 'The Computer') {
+      console.log('How did you lose to the computer?')
+      setLeaderboard(false)
     }
-  }, [theWinner]);
+  }, [theWinner])
 
   useEffect(() => {
-    leaderboard ? setLeaderboardOption(true) : setLeaderboardOption(false);
-  }, [leaderboard]);
+    leaderboard ? setLeaderboardOption(true) : setLeaderboardOption(false)
+  }, [leaderboard])
 
   useEffect(() => {
-    let tempArr = [];
+    let tempArr = []
     scoresArr.forEach((obj) => {
-      tempArr.push(obj.highScore);
-    });
-    tempArr.sort((a, b) => a - b);
-    let tempArr2 = [];
+      tempArr.push(obj.highScore)
+    })
+    tempArr.sort((a, b) => a - b)
+    let tempArr2 = []
     tempArr.slice(0, 10).forEach((score) => {
       scoresArr.forEach((obj) => {
         if (obj.highScore === score) {
-          tempArr2.push(obj);
+          tempArr2.push(obj)
         }
-      });
-    });
-    setTopTenArr([...new Set(tempArr2)].slice(0, 10));
+      })
+    })
+    setTopTenArr([...new Set(tempArr2)].slice(0, 10))
     // setIsLoading(false);
-  }, [scoresArr]);
+  }, [scoresArr])
 
   // useEffect(() => {
   // console.log("top ten", topTenArr);
@@ -219,53 +219,51 @@ export default function HighScores(props) {
 
   function liName(num) {
     if (topTenArr.length > 0) {
-      return <li> {topTenArr[num].name}</li>;
-    } else {
-      return <li> Loading...</li>;
+      return <li> {topTenArr[num].name}</li>
     }
+    return <li> Loading...</li>
   }
 
   function liScore(num) {
     if (topTenArr.length > 0) {
-      return <div> {topTenArr[num].highScore}</div>;
-    } else {
-      return <div> Loading ...</div>;
+      return <div> {topTenArr[num].highScore}</div>
     }
+    return <div> Loading ...</div>
   }
 
   function handleYes() {
-    setLeaderboardOption(false);
-    console.log(theWinner);
+    setLeaderboardOption(false)
+    console.log(theWinner)
     axios
       .post(`https://jel-connect-four-scores.herokuapp.com/score`, {
         name: theWinner,
         highScore: String(turns),
       })
       .then((response) => {
-        console.log("Score posted", response);
+        console.log('Score posted', response)
       })
       .then(
         axios
           .get(`https://jel-connect-four-scores.herokuapp.com/scores`)
           .then((response) => {
-            setScoresArr(response.data);
-            setHasBeenPosted(true);
-            props.history.push("/highscores", {
+            setScoresArr(response.data)
+            setHasBeenPosted(true)
+            props.history.push('/highscores', {
               scoreCount: turns,
               tenthScore: 10,
               onLeaderboard: true,
               playerOneName: theWinner,
               playerTwoName: theWinner,
               hasBeenPosted: true,
-            });
-            window.location.reload();
+            })
+            window.location.reload()
           })
-          .catch((err) => console.log("error", err))
+          .catch((err) => console.log('error', err))
       )
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
   }
   function handleNo() {
-    setLeaderboardOption(false);
+    setLeaderboardOption(false)
   }
 
   // function postScore() {
@@ -314,9 +312,7 @@ export default function HighScores(props) {
       <div css={highScoreMessageCss}>
         {theWinner} won in {turns} turns.
         <br />
-        {leaderboard
-          ? "You qualified for the leaderboard!"
-          : "You did not make it onto the leaderboard."}
+        {leaderboard ? 'You qualified for the leaderboard!' : 'You did not make it onto the leaderboard.'}
         <br />
         {leaderboardOption && !hasBeenPosted ? (
           <div css={postOptionCss}>
@@ -333,5 +329,5 @@ export default function HighScores(props) {
         Play Again?
       </button>
     </div>
-  );
+  )
 }
