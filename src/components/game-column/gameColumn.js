@@ -229,7 +229,14 @@ export default function GameColumn(props) {
   const [activeClass5, setActiveClass5] = useState('circle')
   const [activeClass6, setActiveClass6] = useState('circle')
 
-  let columnArr = [setActiveClass1, setActiveClass2, setActiveClass3, setActiveClass4, setActiveClass5, setActiveClass6]
+  const columnArr = [
+    setActiveClass1,
+    setActiveClass2,
+    setActiveClass3,
+    setActiveClass4,
+    setActiveClass5,
+    setActiveClass6,
+  ]
 
   // useEffect(() => {
   //   setTurn(props.player)
@@ -261,7 +268,7 @@ export default function GameColumn(props) {
   }, [player.turn])
 
   function clickHandler() {
-    let time = 40
+    const time = 40
     for (let i = 0; i < rowsRemaining - 1; i++) {
       setTimeout(() => {
         columnArr[i](player.turn === 'Player One' ? 'circleRedActive' : 'circleYellowActive')

@@ -103,14 +103,18 @@ export default function Game(props) {
         hasBeenPosted: false,
       })
     }
-    // console.log("10th Score", tenthScore.highScore);
-    // console.log("turn count", player.count);
-    // props.history.push("/highscores", {
-    //   scoreCount: player.count,
-    //   tenthScore: tenthScore.highScore,
-    //   onLeaderboard: true,
-    // });
   }
+
+  useEffect(() => {
+    setNumOfColumnsRemaining(availableColumns.length - 1)
+  }, [availableColumns])
+  // console.log("10th Score", tenthScore.highScore);
+  // console.log("turn count", player.count);
+  // props.history.push("/highscores", {
+  //   scoreCount: player.count,
+  //   tenthScore: tenthScore.highScore,
+  //   onLeaderboard: true,
+  // });
   // console.log(winner);
 
   // setPlayer(playerOneName);
@@ -147,12 +151,12 @@ export default function Game(props) {
   // }, [automatePlayTwo])
 
   useEffect(() => {
-    let tempArr = []
+    const tempArr = []
     scoresArr.forEach((obj) => {
       tempArr.push(obj.highScore)
     })
     tempArr.sort((a, b) => a - b)
-    let tempArr2 = []
+    const tempArr2 = []
     tempArr.slice(0, 10).forEach((score) => {
       scoresArr.forEach((obj) => {
         if (obj.highScore === score) {

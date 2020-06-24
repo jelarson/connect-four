@@ -124,7 +124,7 @@ export default function Home(props) {
   const [twoPlayVis, setTwoPlayVis] = useState('none')
   const [playOneName, setPlayOneName] = useState('')
   const [playTwoName, setPlayTwoName] = useState('')
-  const [gamepath, setGamePath] = useState('/')
+  // const [gamepath, setGamePath] = useState('/')
   const [playingComp, setPlayingComp] = useState(false)
 
   axios
@@ -167,10 +167,10 @@ export default function Home(props) {
       <div css={homeButtonChoiceWrapper}>
         <div className="home-button-message">Who would you like to play against?</div>
         <div className="home-button-wrapper">
-          <button css={homeButton} onClick={handleTwoPlayButton}>
+          <button css={homeButton} onClick={handleTwoPlayButton} type="button">
             Another Player
           </button>
-          <button css={homeButton} onClick={handleOnePlayButton}>
+          <button css={homeButton} onClick={handleOnePlayButton} type="button">
             The Computer
           </button>
         </div>
@@ -197,7 +197,7 @@ export default function Home(props) {
               />
             </form>
           </div>
-          <button onClick={linkClick} css={homeButton} style={{ borderStyle: 'none' }}>
+          <button onClick={linkClick} css={homeButton} style={{ borderStyle: 'none' }} type="button">
             Start Game
           </button>
         </div>
@@ -212,7 +212,7 @@ export default function Home(props) {
               }}
             />
           </form>
-          <button onClick={linkClick} css={homeButton} style={{ borderStyle: 'none' }}>
+          <button onClick={linkClick} css={homeButton} style={{ borderStyle: 'none' }} type="button">
             Start Game
           </button>
         </div>

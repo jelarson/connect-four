@@ -196,12 +196,12 @@ export default function HighScores(props) {
   }, [leaderboard])
 
   useEffect(() => {
-    let tempArr = []
+    const tempArr = []
     scoresArr.forEach((obj) => {
       tempArr.push(obj.highScore)
     })
     tempArr.sort((a, b) => a - b)
-    let tempArr2 = []
+    const tempArr2 = []
     tempArr.slice(0, 10).forEach((score) => {
       scoresArr.forEach((obj) => {
         if (obj.highScore === score) {
@@ -318,14 +318,18 @@ export default function HighScores(props) {
           <div css={postOptionCss}>
             Would you Like to post your score?
             <div css={optionButtonWrapperCss}>
-              <button onClick={handleYes}>Yes</button>
-              <button onClick={handleNo}>No</button>
+              <button onClick={handleYes} type="button">
+                Yes
+              </button>
+              <button onClick={handleNo} type="button">
+                No
+              </button>
             </div>
           </div>
         ) : null}
         {/* {postScore} */}
       </div>
-      <button css={playAgainButtonCss} onClick={handleClick}>
+      <button css={playAgainButtonCss} onClick={handleClick} type="button">
         Play Again?
       </button>
     </div>
