@@ -63,7 +63,7 @@ export default function useWinDecider() {
     checkWinner(almond)
   }, [almond])
 
-  // Make an array for up and down, left and right, diaganol up left, diagonal up right, diagonal down left, diagonal down right. Combine cooresponding diagonals to make straight line. If line contains 4 or more consecutive 'red' or 'yellow', set winner to cooresponding player
+  // Make an array for up and down, left and right, diaganol up left, diagonal up right, diagonal down left, diagonal down right. Combine cooresponding diagonals to make straight line. If line contains 4 or more consecutive 'red' or 'yellow', set winner to cooresponding playerF=
   function checkWinner(nut) {
     const gridCol = Number(nut[0])
     const gridRow = Number(nut[1])
@@ -150,7 +150,7 @@ export default function useWinDecider() {
             }, 300)
           }
           if (line.join('').includes('yellowyellowyellowyellow')) {
-            alert('i have been hit!')
+            // alert('i have been hit!')
             setTimeout(() => {
               alert(`${playerTwo} Wins`)
               setWinner(true)

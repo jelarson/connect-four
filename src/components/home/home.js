@@ -123,6 +123,8 @@ const inputBox = css`
 const gridGameWrapperCss = css`
   display: flex;
   flex-direction: row;
+  padding: 12px;
+  background-color: black;
 `
 
 export default function Home(props) {

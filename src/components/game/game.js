@@ -74,10 +74,8 @@ export default function Game(props) {
   const [tenthScore, setTenthScore] = useState({})
   const [automatePlayTwo, setAutomatePlayTwo] = useState(false)
   const [availableColumns, setAvailableColumns] = useState([1, 2, 3, 4, 5, 6, 7])
-  const [numOfColumnsRemaining, setNumOfColumnsRemaining] = useState(7)
-  const [compChoice, setCompChoice] = useState(
-    availableColumns[Math.floor(Math.random() * Math.floor(numOfColumnsRemaining))]
-  )
+  const [numOfColumnsRemaining, setNumOfColumnsRemaining] = useState(6)
+  const [compChoice, setCompChoice] = useState(availableColumns[Math.floor(Math.random() * availableColumns.length)])
 
   // if boolean for winner is true, redirect to highscores page
   if (winner) {
@@ -131,8 +129,9 @@ export default function Game(props) {
   // if you are playing the computer and it is the computer's turn, choose a random number as the index to see which column it chooses
   useEffect(() => {
     if (automatePlayTwo && player.turn === 'Player Two') {
+      console.log('here are the remaing columns', availableColumns)
       setTimeout(() => {
-        setCompChoice(Math.floor(Math.random() * Math.floor(numOfColumnsRemaining)) + 1)
+        setCompChoice(Math.floor(Math.random() * availableColumns.length))
       }, 1000)
     }
   }, [player.turn])

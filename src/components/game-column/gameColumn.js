@@ -253,7 +253,11 @@ export default function GameColumn(props) {
 
   // if you are playing the computer, it is their turn, and their chosen column matches this column, run the clickHanldler function after a short pause
   useEffect(() => {
-    if (player.turn === 'Player Two' && props.column === props.compChoice && props.automated === true) {
+    if (
+      player.turn === 'Player Two' &&
+      props.column === props.remaining[props.compChoice] &&
+      props.automated === true
+    ) {
       setTimeout(() => {
         clickHandler()
       }, 500)

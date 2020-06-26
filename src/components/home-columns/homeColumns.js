@@ -26,14 +26,15 @@ const columnWrapperCss = css`
     .circleYellowActive {
       width: 15px;
       height: 15px;
-      border: 2px white solid;
+      border: 2px black solid;
       border-radius: 8px;
-      background-color: #faa307;
+      // background-color: #faa307;
+      background-color: black;
     }
     .circleRedActive {
       width: 15px;
       height: 15px;
-      border: 2px white solid;
+      border: 1px white solid;
       border-radius: 8px;
       background-color: #d00000;
       // background-color: purple;
